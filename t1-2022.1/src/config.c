@@ -1,11 +1,9 @@
-#include <time.h>
-#include <errno.h>
 #include "config.h"
-
+#include <errno.h>
+#include <time.h>
 
 /* msleep(): Sleep for the requested number of milliseconds. */
-int msleep(long msec)
-{
+int msleep(long msec) {
     struct timespec ts;
     int res;
 
