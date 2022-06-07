@@ -2,12 +2,13 @@
 #define __buffet_H__
 
 #include <pthread.h>
+#include <semaphore.h>
 
 #include "queue.h"
 
 typedef struct buffet {
     int _id;
-    int _meal[5];
+    sem_t _meal_sem[5];
 
     int queue_left[5];
     int queue_right[5];

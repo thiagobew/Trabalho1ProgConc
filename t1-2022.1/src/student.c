@@ -1,3 +1,4 @@
+#include <semaphore.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -14,11 +15,16 @@ void *student_run(void *arg) {
     student_t *self = (student_t *)arg;
     table_t *tables = globals_get_table();
 
+    // Criação do mutex para controlar as ações do estudante
+    pthread_mutex_init(&self->mutex, NULL);
+
     worker_gate_insert_queue_buffet(self);
     student_serve(self);
     student_seat(self, tables);
     student_leave(self, tables);
 
+    // Destroi o mutex
+    pthread_mutex_destroy(&self->mutex);
     pthread_exit(NULL);
 };
 
@@ -27,7 +33,17 @@ void student_seat(student_t *self, table_t *table) {
 }
 
 void student_serve(student_t *self) {
-    /* Insira sua lógica aqui */
+    buffet_t *buffets = globals_get_buffet();
+    buffet_t buffet = buffets[self->_id_buffet];
+
+    while (self->_buffet_position != -1) {
+        if (self->_wishes[self->_buffet_position] == 1) {
+            // Pega a comida dando wait no semáforo que representa a comida
+            sem_wait(&buffet._meal_sem[self->_buffet_position]);
+        }
+        // Anda na fila
+        buffet_next_step(&buffet, self);
+    }
 }
 
 void student_leave(student_t *self, table_t *table) {
@@ -40,7 +56,7 @@ void student_leave(student_t *self, table_t *table) {
 
 student_t *student_init() {
     student_t *student = malloc(sizeof(student_t));
-    student->_id = rand() % 1000;
+    student->_id = rand() % 1000; // TODO
     student->_buffet_position = -1;
     int none = TRUE;
     for (int j = 0; j <= 4; j++) {

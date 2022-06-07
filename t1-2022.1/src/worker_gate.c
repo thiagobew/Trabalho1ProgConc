@@ -47,6 +47,7 @@ void worker_gate_remove_student() {
 
     // Insere o estudante no buffet encontrado
     buffet_queue_insert(buffets, student);
+    pthread_mutex_unlock(&student->mutex); // libera o estudante para agir
 }
 
 void worker_gate_look_buffet() {
@@ -76,10 +77,18 @@ void worker_gate_init(worker_gate_t *self) {
 }
 
 void worker_gate_finalize(worker_gate_t *self) {
+    // Finaliza a fila
+    queue_t *queue = globals_get_queue();
+    queue_finalize(queue);
     pthread_join(self->thread, NULL);
     free(self);
 }
 
+// Colocar o estudante na fila do RU
 void worker_gate_insert_queue_buffet(student_t *student) {
-    /* Insira aqui sua lógica */
+    // Pega a fila e manda o student para ela
+    queue_t *queue = globals_get_queue();
+    queue_insert(queue, student);
+    // Dá um lock para esperar o estudante sair da fila
+    pthread_mutex_lock(&student->mutex);
 }

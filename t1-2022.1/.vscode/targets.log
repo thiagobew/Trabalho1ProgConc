@@ -7,7 +7,7 @@ make -C /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/src all
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Jun  6 19:40:05 2022
+# Make data base, printed on Tue Jun  7 19:16:37 2022
 
 # Variables
 
@@ -66,7 +66,7 @@ PATH = /home/vulcano/.vscode-server/bin/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-2bdf9d24-2cda-480e-ac1b-96df22d0f0c2.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-309e0f7c-c23f-4ac4-9be1-3f9f2027afc9.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -82,9 +82,9 @@ PWD = /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/12817_interop
+WSL_INTEROP = /run/WSL/18963_interop
 # environment
-WT_SESSION = aff2f305-08c8-482b-a00f-74fd85f5e682
+WT_SESSION = a1034aff-0088-4eff-9bc1-207d8ec6ee1a
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -94,7 +94,7 @@ LESSCLOSE = /usr/bin/lesspipe %s %s
 # environment
 LOGNAME = vulcano
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
@@ -203,7 +203,7 @@ MOTD_SHOWN = update-motd
 # Not a target:
 /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/buffet.h:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-02 20:28:34.555378
+#  Last modified 2022-06-06 21:37:50.593242
 #  File has been updated.
 #  Successfully updated.
 
@@ -289,8 +289,8 @@ queue.o:
 
 # Not a target:
 Makefile:
-#  Implicit rule search has been done.
  
+#  Implicit rule search has been done.
 #  Last modified 2022-06-02 20:28:34.555378
 #  File has been updated.
 #  Successfully updated.
@@ -298,7 +298,7 @@ Makefile:
 # Not a target:
 /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/queue.h:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-02 20:28:34.555378
+#  Last modified 2022-06-06 21:38:01.294352
 #  File has been updated.
 #  Successfully updated.
 
@@ -311,7 +311,7 @@ chef.o:
 # Not a target:
 config.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-02 20:28:34.555378
+#  Last modified 2022-06-06 19:55:09.741369
 #  File has been updated.
 #  Successfully updated.
 
@@ -409,7 +409,7 @@ main.o:
 # strcache performance: lookups = 82 / hit rate = 37%
 # hash-table stats:
 # Load=51/8192=1%, Rehash=0, Collisions=2/82=2%
-# Finished Make data base on Mon Jun  6 19:40:05 2022
+# Finished Make data base on Tue Jun  7 19:16:37 2022
 
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
@@ -418,7 +418,7 @@ main.o:
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Jun  6 19:40:05 2022
+# Make data base, printed on Tue Jun  7 19:16:37 2022
 
 # Variables
 
@@ -471,7 +471,7 @@ PATH = /home/vulcano/.vscode-server/bin/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-2bdf9d24-2cda-480e-ac1b-96df22d0f0c2.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-309e0f7c-c23f-4ac4-9be1-3f9f2027afc9.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -487,9 +487,9 @@ PWD = /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/12817_interop
+WSL_INTEROP = /run/WSL/18963_interop
 # environment
-WT_SESSION = aff2f305-08c8-482b-a00f-74fd85f5e682
+WT_SESSION = a1034aff-0088-4eff-9bc1-207d8ec6ee1a
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -499,7 +499,7 @@ LESSCLOSE = /usr/bin/lesspipe %s %s
 # environment
 LOGNAME = vulcano
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
@@ -569,6 +569,7 @@ ROOTDIR := /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1
 # default
 .RECIPEPREFIX := 
 # environment
+ 
 LANG = C
 # environment
 TERM = xterm-256color
@@ -578,7 +579,6 @@ VSCODE_EXTHOST_WILL_SEND_SOCKET = true
 WSL_DISTRO_NAME = Ubuntu
 # environment
 MOTD_SHOWN = update-motd
- 
 # variable set hash-table stats:
 # Load=78/1024=8%, Rehash=0, Collisions=4/116=3%
 
@@ -673,6 +673,6 @@ clean: distclean
 # strcache performance: lookups = 24 / hit rate = 41%
 # hash-table stats:
 # Load=14/8192=0%, Rehash=0, Collisions=1/24=4%
-# Finished Make data base on Mon Jun  6 19:40:05 2022
+# Finished Make data base on Tue Jun  7 19:16:37 2022
 
  

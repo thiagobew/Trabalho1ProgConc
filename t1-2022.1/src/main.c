@@ -11,6 +11,13 @@
 #include "student.h"
 #include "worker_gate.h"
 
+/*
+-> Mutex dentro do estudante
+-> Semáforo do Gate
+-> Mutex para cada posição do buffet, para cada lado
+
+*/
+
 config_t parse(int argc, char **argv) {
     int c;
     config_t config = {50, 2, 10, 5};

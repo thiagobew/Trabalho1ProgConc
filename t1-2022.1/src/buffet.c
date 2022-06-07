@@ -29,7 +29,7 @@ void buffet_init(buffet_t *self, int number_of_buffets) {
 
         /* Inicia com 40 unidades de comida em cada bacia */
         for (j = 0; j < 5; j++) {
-            self[i]._meal[j] = 40;
+            sem_init(&self[i]._meal_sem[j], 0, 40);
             /* Cria um mutex para cada posição das filas do buffet */
             pthread_mutex_init(&self[i].queue_left_mutex[j], NULL);
             pthread_mutex_init(&self[i].queue_right_mutex[j], NULL);
@@ -76,7 +76,7 @@ void buffet_next_step(buffet_t *self, student_t *student) {
         if (student->left_or_right == 'L') {
             /* Caminha para a posição seguinte da fila do buffet.*/
             int position = student->_buffet_position;
-            // Lock no Mutex da próxima posição que tentará pegar comida
+            // Lock no Mutex da próxima posição para esperar o próximo estudante
             pthread_mutex_lock(&self[student->_id_buffet].queue_left_mutex[position + 1]);
 
             self[student->_id_buffet].queue_left[position] = 0;
@@ -94,6 +94,10 @@ void buffet_next_step(buffet_t *self, student_t *student) {
             student->_buffet_position = student->_buffet_position + 1;
             pthread_mutex_unlock(&self[student->_id_buffet].queue_right_mutex[position]);
         }
+    } else {
+        /* Se estudante não precisa mais de comida, então ele sai do buffet */
+        student->_buffet_position = -1;
+        sem_post(&gate_sem);
     }
 }
 
@@ -118,8 +122,9 @@ void _log_buffet(buffet_t *self) {
 
     printf("\n\n\u250F\u2501 Queue left: [ %d %d %d %d %d ]\n", ids_left[0], ids_left[1], ids_left[2], ids_left[3], ids_left[4]);
     fflush(stdout);
-    printf("\u2523\u2501 BUFFET %d = [RICE: %d/40 BEANS:%d/40 PLUS:%d/40 PROTEIN:%d/40 SALAD:%d/40]\n",
-           self->_id, self->_meal[0], self->_meal[1], self->_meal[2], self->_meal[3], self->_meal[4]);
+    // Inteiros de comida foram alterados para semáforo para facilitar a sincronização entre sa threads que acessam a comida
+    // printf("\u2523\u2501 BUFFET %d = [RICE: %d/40 BEANS:%d/40 PLUS:%d/40 PROTEIN:%d/40 SALAD:%d/40]\n",
+    //    self->_id, self->_meal[0], self->_meal[1], self->_meal[2], self->_meal[3], self->_meal[4]);
     fflush(stdout);
     printf("\u2517\u2501 Queue right: [ %d %d %d %d %d ]\n", ids_right[0], ids_right[1], ids_right[2], ids_right[3], ids_right[4]);
     fflush(stdout);
