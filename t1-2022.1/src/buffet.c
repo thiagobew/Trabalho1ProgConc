@@ -1,11 +1,14 @@
 #include "buffet.h"
 #include "config.h"
+#include <semaphore.h>
 #include <stdlib.h>
+
+// Semáforo único usado pelo worker_gate e pelos buffets
+extern sem_t gate_sem;
 
 void *buffet_run(void *arg) {
     int all_students_entered = FALSE;
     buffet_t *self = (buffet_t *)arg;
-
     /*  O buffet funciona enquanto houver alunos na fila externa. */
     while (all_students_entered == FALSE) {
         /* Cada buffet possui: Arroz, Feijão, Acompanhamento, Proteína e Salada */
@@ -25,8 +28,12 @@ void buffet_init(buffet_t *self, int number_of_buffets) {
         self[i]._id = i;
 
         /* Inicia com 40 unidades de comida em cada bacia */
-        for (j = 0; j < 5; j++)
+        for (j = 0; j < 5; j++) {
             self[i]._meal[j] = 40;
+            /* Cria um mutex para cada posição das filas do buffet */
+            pthread_mutex_init(&self[i].queue_left_mutex[j], NULL);
+            pthread_mutex_init(&self[i].queue_right_mutex[j], NULL);
+        }
 
         for (j = 0; j < 5; j++) {
             /* A fila esquerda do buffet possui cinco posições. */
@@ -37,6 +44,8 @@ void buffet_init(buffet_t *self, int number_of_buffets) {
 
         pthread_create(&self[i].thread, NULL, buffet_run, &self[i]);
     }
+    // Inicializa o semáforo com o valor total de posições disponíveis
+    sem_init(&gate_sem, 0, number_of_buffets * 10);
 }
 
 int buffet_queue_insert(buffet_t *self, student_t *student) {
@@ -62,18 +71,28 @@ int buffet_queue_insert(buffet_t *self, student_t *student) {
 
 void buffet_next_step(buffet_t *self, student_t *student) {
     /* Se estudante ainda precisa se servir de mais alguma coisa... */
-    if (student->_buffet_position + 1 < 5) { /* Está na fila esquerda? */
-        if (student->left_or_right == 'L') { /* Caminha para a posição seguinte da fila do buffet.*/
+    if (student->_buffet_position + 1 < 5) {
+        /* Está na fila esquerda? */
+        if (student->left_or_right == 'L') {
+            /* Caminha para a posição seguinte da fila do buffet.*/
             int position = student->_buffet_position;
+            // Lock no Mutex da próxima posição que tentará pegar comida
+            pthread_mutex_lock(&self[student->_id_buffet].queue_left_mutex[position + 1]);
+
             self[student->_id_buffet].queue_left[position] = 0;
             self[student->_id_buffet].queue_left[position + 1] = student->_id;
             student->_buffet_position = student->_buffet_position + 1;
+
+            // Unlock no Mutex da própria posição, visto que terminou de pegar a comida
+            pthread_mutex_unlock(&self[student->_id_buffet].queue_left_mutex[position]);
         } else /* Está na fila direita? */
         {      /* Caminha para a posição seguinte da fila do buffet.*/
             int position = student->_buffet_position;
+            pthread_mutex_lock(&self[student->_id_buffet].queue_right_mutex[position + 1]);
             self[student->_id_buffet].queue_right[position] = 0;
             self[student->_id_buffet].queue_right[position + 1] = student->_id;
             student->_buffet_position = student->_buffet_position + 1;
+            pthread_mutex_unlock(&self[student->_id_buffet].queue_right_mutex[position]);
         }
     }
 }
