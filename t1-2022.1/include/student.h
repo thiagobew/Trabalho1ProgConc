@@ -9,6 +9,7 @@ typedef struct student {
     int _wishes[5];        /* salada, arroz, feijão, acompanhamento, proteína */
     int _buffet_position;  /* Posição na fila do buffet*/
     int _id_buffet;        /* Qual buffet o estudante está alocado?*/
+    int _id_table;         /* Qual mesa o estudante está alocado?*/
     char left_or_right;    /* Fila da esquerda(L) ou da direita(R)*/
     pthread_t thread;      /* A thread */
     pthread_mutex_t mutex; // Mutex para controlar o próprio estudante

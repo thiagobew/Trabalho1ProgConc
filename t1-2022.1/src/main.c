@@ -15,7 +15,9 @@
 -> Mutex dentro do estudante
 -> Semáforo do Gate
 -> Mutex para cada posição do buffet, para cada lado
-
+-> Array de semáforos ao invés de array de inteiros para representar a comida
+-> Semáforo para controlar acesso às mesas
+-> Mutex para controlar acesso às mesas
 */
 
 config_t parse(int argc, char **argv) {
@@ -51,9 +53,6 @@ config_t parse(int argc, char **argv) {
     return config;
 }
 
-// Externa a quantidade de buffets criadas para o Worker ver
-extern int quant_buffets;
-
 /* --------------------------------------------------------- *
  *                                                           *
  *     ATENÇÃO: A FUNÇÃO MAIN NÃO PODERÁ SER ALTERADA!       *
@@ -65,7 +64,6 @@ worker_gate_t *worker_gate = NULL;
 buffet_t *buffets = NULL;
 
 void _configure_restaurant(int buffet_number) {
-    quant_buffets = buffet_number;
     chef = malloc(sizeof(chef_t));
     worker_gate = malloc(sizeof(worker_gate_t));
     buffets = malloc(sizeof(buffet_t) * buffet_number);

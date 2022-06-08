@@ -5,8 +5,10 @@
 #include <stdlib.h>
 
 worker_gate_t self;
+extern pthread_mutex_t tables_mutex;
+extern sem_t tables_sem;
 extern sem_t gate_sem;
-extern int quant_buffets;
+extern config_t config;
 
 void worker_gate_look_queue() {
     if (globals_get_queue()->_length == 0)
@@ -28,7 +30,7 @@ void worker_gate_remove_student() {
         if (buffet_found)
             break;
 
-        for (int i = 0; i < quant_buffets; i++) {
+        for (int i = 0; i < config.buffets; i++) {
             if (buffets[i].queue_left[0] == 0) {
                 student->left_or_right = 'L';
                 student->_id_buffet = i;
@@ -61,6 +63,8 @@ void *worker_gate_run(void *arg) {
     number_students = *((int *)arg);
     all_students_entered = number_students > 0 ? FALSE : TRUE;
 
+    sem_init(&tables_sem, 0, config.tables * config.seat_per_table);
+
     while (all_students_entered == FALSE) {
         worker_gate_look_queue();
         worker_gate_look_buffet();
@@ -80,6 +84,10 @@ void worker_gate_finalize(worker_gate_t *self) {
     // Finaliza a fila
     queue_t *queue = globals_get_queue();
     queue_finalize(queue);
+    // Destroi o semáforo e mutex das tables
+    sem_destroy(&tables_sem);
+    pthread_mutex_destroy(&tables_mutex);
+    // Finaliza
     pthread_join(self->thread, NULL);
     free(self);
 }

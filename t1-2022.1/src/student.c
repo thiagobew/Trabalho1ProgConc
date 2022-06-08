@@ -11,6 +11,10 @@
 #include "table.h"
 #include "worker_gate.h"
 
+extern config_t config;
+extern pthread_mutex_t tables_mutex;
+extern sem_t tables_sem;
+
 void *student_run(void *arg) {
     student_t *self = (student_t *)arg;
     table_t *tables = globals_get_table();
@@ -29,7 +33,22 @@ void *student_run(void *arg) {
 };
 
 void student_seat(student_t *self, table_t *table) {
-    /* Insira sua lógica aqui */
+    sem_wait(&tables_sem); // Semáforo com quantos lugares disponíveis tem
+    // Mutex para somente 1 estudante procurar lugar por vez
+    pthread_mutex_lock(&tables_mutex);
+
+    // Procura e pega um lugar disponível nas mesas
+    table_t *tables = globals_get_table();
+    for (int i = 0; i < config.tables; i++) {
+        if (tables[i]._empty_seats > 0) {
+            // salva o id da mesa em que o estudante está
+            self->_id_table = i;
+            tables[i]._empty_seats--;
+            break;
+        }
+    }
+
+    pthread_mutex_unlock(&tables_mutex);
 }
 
 void student_serve(student_t *self) {
@@ -47,7 +66,14 @@ void student_serve(student_t *self) {
 }
 
 void student_leave(student_t *self, table_t *table) {
-    /* Insira sua lógica aqui */
+    // Lock para poder acessar o array de tables
+    pthread_mutex_lock(&tables_mutex);
+
+    // Libera um lugar na mesa que estava
+    table[self->_id_table]._empty_seats++;
+
+    pthread_mutex_unlock(&tables_mutex);
+    sem_post(&tables_sem); // Libera o semáforo de lugares disponíveis
 }
 
 /* --------------------------------------------------------- */

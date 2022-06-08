@@ -18,6 +18,10 @@ void *buffet_run(void *arg) {
         msleep(5000); /* Pode retirar este sleep quando implementar a solução! */
     }
 
+    // Destrói o semáforo de cada comida
+    for (int i = 0; i < 5; i++) {
+        sem_destroy(&self->_meal_sem[i]);
+    }
     pthread_exit(NULL);
 }
 
