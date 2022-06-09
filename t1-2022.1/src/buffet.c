@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 // Semáforo único usado pelo worker_gate e pelos buffets
-extern sem_t gate_sem;
+sem_t gate_sem;
 
 void *buffet_run(void *arg) {
     int all_students_entered = FALSE;
@@ -48,8 +48,6 @@ void buffet_init(buffet_t *self, int number_of_buffets) {
 
         pthread_create(&self[i].thread, NULL, buffet_run, &self[i]);
     }
-    // Inicializa o semáforo com o valor total de posições disponíveis
-    sem_init(&gate_sem, 0, number_of_buffets * 10);
 }
 
 int buffet_queue_insert(buffet_t *self, student_t *student) {
@@ -100,6 +98,11 @@ void buffet_next_step(buffet_t *self, student_t *student) {
         }
     } else {
         /* Se estudante não precisa mais de comida, então ele sai do buffet */
+        if (student->left_or_right == 'L')
+            self[student->_id_buffet].queue_left[4] = 0;
+        else
+            self[student->_id_buffet].queue_right[4] = 0;
+
         student->_buffet_position = -1;
         sem_post(&gate_sem);
     }
@@ -124,9 +127,22 @@ void _log_buffet(buffet_t *self) {
     int *ids_left = self->queue_left;
     int *ids_right = self->queue_right;
 
+    int meal0;
+    int meal1;
+    int meal2;
+    int meal3;
+    int meal4;
+    sem_getvalue(&self->_meal_sem[0], &meal0);
+    sem_getvalue(&self->_meal_sem[1], &meal1);
+    sem_getvalue(&self->_meal_sem[2], &meal2);
+    sem_getvalue(&self->_meal_sem[3], &meal3);
+    sem_getvalue(&self->_meal_sem[4], &meal4);
+
     printf("\n\n\u250F\u2501 Queue left: [ %d %d %d %d %d ]\n", ids_left[0], ids_left[1], ids_left[2], ids_left[3], ids_left[4]);
     fflush(stdout);
     // Inteiros de comida foram alterados para semáforo para facilitar a sincronização entre sa threads que acessam a comida
+    printf("\u2523\u2501 BUFFET %d = [RICE: %d/40 BEANS:%d/40 PLUS:%d/40 PROTEIN:%d/40 SALAD:%d/40]\n",
+           self->_id, meal0, meal1, meal2, meal3, meal4);
     // printf("\u2523\u2501 BUFFET %d = [RICE: %d/40 BEANS:%d/40 PLUS:%d/40 PROTEIN:%d/40 SALAD:%d/40]\n",
     //    self->_id, self->_meal[0], self->_meal[1], self->_meal[2], self->_meal[3], self->_meal[4]);
     fflush(stdout);

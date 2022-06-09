@@ -11,24 +11,22 @@
 #include "table.h"
 #include "worker_gate.h"
 
-extern config_t config;
-extern pthread_mutex_t tables_mutex;
-extern sem_t tables_sem;
-
 void *student_run(void *arg) {
     student_t *self = (student_t *)arg;
     table_t *tables = globals_get_table();
 
     // Criação do mutex para controlar as ações do estudante
-    pthread_mutex_init(&self->mutex, NULL);
+    sem_init(&self->student_sem, 0, 0);
 
     worker_gate_insert_queue_buffet(self);
+    msleep(5000);
+    sem_wait(&self->student_sem);
     student_serve(self);
     student_seat(self, tables);
     student_leave(self, tables);
 
     // Destroi o mutex
-    pthread_mutex_destroy(&self->mutex);
+    sem_destroy(&self->student_sem);
     pthread_exit(NULL);
 };
 
@@ -52,8 +50,11 @@ void student_seat(student_t *self, table_t *table) {
 }
 
 void student_serve(student_t *self) {
-    buffet_t *buffets = globals_get_buffet();
+    printf("A\n");
+    buffet_t *buffets = globals_get_buffets();
+    printf("ID: %d\n", self->_id_buffet);
     buffet_t buffet = buffets[self->_id_buffet];
+    printf("B\n");
 
     while (self->_buffet_position != -1) {
         if (self->_wishes[self->_buffet_position] == 1) {

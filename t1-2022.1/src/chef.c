@@ -1,22 +1,57 @@
-#include <stdlib.h>
-
 #include "chef.h"
 #include "config.h"
+#include "globals.h"
+#include <semaphore.h>
+#include <stdlib.h>
+
+// Verifica se todos os estudantes já se serviram
+int all_students_served() {
+    queue_t *queue = globals_get_queue();
+    if (queue->_length > 0) {
+        return 0;
+    }
+
+    buffet_t *buffets = globals_get_buffets();
+    for (int i = 0; i < config.buffets; i++) {
+        for (int j = 0; j < 5; j++) {
+            if (buffets[i].queue_left[j] != 0)
+                return 0;
+            if (buffets[i].queue_right[j] != 0)
+                return 0;
+        }
+    }
+    return 1;
+}
 
 void *chef_run() {
-    /* Insira sua lógica aqui */
-    while (TRUE) {
-        msleep(5000); /* Pode retirar este sleep quando implementar a solução! */
+    while (all_students_served() == 0) {
+        chef_check_food();
     }
 
     pthread_exit(NULL);
 }
 
-void chef_put_food() {
-    /* Insira sua lógica aqui */
+void chef_put_food(sem_t *meal_sem) {
+    for (int i = 0; i < 40; i++) {
+        sem_post(meal_sem);
+    }
 }
+
 void chef_check_food() {
-    /* Insira sua lógica aqui */
+    buffet_t *buffets = globals_get_buffets();
+
+    for (int i = 0; i < config.buffets; i++) {
+        for (int j = 0; j < 5; j++) {
+
+            int food_amount;
+            sem_t *meal_sem = &buffets[i]._meal_sem[j];
+            sem_getvalue(meal_sem, &food_amount);
+
+            if (food_amount == 0) {
+                chef_put_food(meal_sem);
+            }
+        }
+    }
 }
 
 /* --------------------------------------------------------- */

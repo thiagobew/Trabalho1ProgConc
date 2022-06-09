@@ -7,7 +7,7 @@ make -C /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/src all
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue Jun  7 19:16:37 2022
+# Make data base, printed on Thu Jun  9 19:13:59 2022
 
 # Variables
 
@@ -66,7 +66,7 @@ PATH = /home/vulcano/.vscode-server/bin/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-309e0f7c-c23f-4ac4-9be1-3f9f2027afc9.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-e2e87094-c39e-43c6-8aa2-0e30f44e311b.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -82,9 +82,9 @@ PWD = /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/18963_interop
+WSL_INTEROP = /run/WSL/17772_interop
 # environment
-WT_SESSION = a1034aff-0088-4eff-9bc1-207d8ec6ee1a
+WT_SESSION = bc7d8999-1ba2-443e-a219-c5c93c2a0bc5
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -173,10 +173,8 @@ TERM = xterm-256color
 VSCODE_EXTHOST_WILL_SEND_SOCKET = true
 # environment
 WSL_DISTRO_NAME = Ubuntu
-# environment
-MOTD_SHOWN = update-motd
 # variable set hash-table stats:
-# Load=82/1024=8%, Rehash=0, Collisions=7/149=5%
+# Load=81/1024=8%, Rehash=0, Collisions=7/148=5%
 
 # Pattern-specific Variable Values
 
@@ -203,7 +201,7 @@ MOTD_SHOWN = update-motd
 # Not a target:
 /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/buffet.h:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-06 21:37:50.593242
+#  Last modified 2022-06-07 20:17:42.640715
 #  File has been updated.
 #  Successfully updated.
 
@@ -276,6 +274,7 @@ student.o:
 distclean: clean
 #  Implicit rule search has not been done.
 #  Modification time never checked.
+ 
 #  File has not been updated.
 #  recipe to execute (from '/home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/build/makefile.executable', line 46):
 	@echo [CLEAN] $(EXEC)
@@ -289,7 +288,6 @@ queue.o:
 
 # Not a target:
 Makefile:
- 
 #  Implicit rule search has been done.
 #  Last modified 2022-06-02 20:28:34.555378
 #  File has been updated.
@@ -371,7 +369,7 @@ clean:
 # Not a target:
 /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/student.h:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-02 20:28:34.555378
+#  Last modified 2022-06-07 20:54:39.514831
 #  File has been updated.
 #  Successfully updated.
 
@@ -409,7 +407,7 @@ main.o:
 # strcache performance: lookups = 82 / hit rate = 37%
 # hash-table stats:
 # Load=51/8192=1%, Rehash=0, Collisions=2/82=2%
-# Finished Make data base on Tue Jun  7 19:16:37 2022
+# Finished Make data base on Thu Jun  9 19:13:59 2022
 
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
@@ -418,7 +416,7 @@ main.o:
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue Jun  7 19:16:37 2022
+# Make data base, printed on Thu Jun  9 19:13:59 2022
 
 # Variables
 
@@ -471,7 +469,7 @@ PATH = /home/vulcano/.vscode-server/bin/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-309e0f7c-c23f-4ac4-9be1-3f9f2027afc9.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-e2e87094-c39e-43c6-8aa2-0e30f44e311b.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -487,9 +485,9 @@ PWD = /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/18963_interop
+WSL_INTEROP = /run/WSL/17772_interop
 # environment
-WT_SESSION = a1034aff-0088-4eff-9bc1-207d8ec6ee1a
+WT_SESSION = bc7d8999-1ba2-443e-a219-c5c93c2a0bc5
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -556,6 +554,7 @@ MAKEFILES :=
 <F = $(notdir $<)
 # environment
 LC_ALL = C
+ 
 # environment
 HOSTTYPE = x86_64
 # automatic
@@ -569,7 +568,6 @@ ROOTDIR := /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1
 # default
 .RECIPEPREFIX := 
 # environment
- 
 LANG = C
 # environment
 TERM = xterm-256color
@@ -577,10 +575,8 @@ TERM = xterm-256color
 VSCODE_EXTHOST_WILL_SEND_SOCKET = true
 # environment
 WSL_DISTRO_NAME = Ubuntu
-# environment
-MOTD_SHOWN = update-motd
 # variable set hash-table stats:
-# Load=78/1024=8%, Rehash=0, Collisions=4/116=3%
+# Load=77/1024=8%, Rehash=0, Collisions=4/115=3%
 
 # Pattern-specific Variable Values
 
@@ -673,6 +669,6 @@ clean: distclean
 # strcache performance: lookups = 24 / hit rate = 41%
 # hash-table stats:
 # Load=14/8192=0%, Rehash=0, Collisions=1/24=4%
-# Finished Make data base on Tue Jun  7 19:16:37 2022
+# Finished Make data base on Thu Jun  9 19:13:59 2022
 
  

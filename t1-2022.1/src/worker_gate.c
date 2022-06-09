@@ -4,15 +4,15 @@
 #include <semaphore.h>
 #include <stdlib.h>
 
-worker_gate_t self;
-extern pthread_mutex_t tables_mutex;
-extern sem_t tables_sem;
-extern sem_t gate_sem;
-extern config_t config;
+worker_gate_t self_thread;
+pthread_mutex_t tables_mutex;
+sem_t tables_sem;
+config_t config;
 
 void worker_gate_look_queue() {
+    printf("Queue length: %d\n", globals_get_queue()->_length);
     if (globals_get_queue()->_length == 0)
-        worker_gate_finalize(&self);
+        worker_gate_finalize(&self_thread);
 }
 
 void worker_gate_remove_student() {
@@ -46,10 +46,10 @@ void worker_gate_remove_student() {
             }
         }
     }
-
     // Insere o estudante no buffet encontrado
     buffet_queue_insert(buffets, student);
-    pthread_mutex_unlock(&student->mutex); // libera o estudante para agir
+    printf("Estudante Liberado ID: %d ID Buffet: %d", student->_id, student->_id_buffet);
+    sem_post(&student->student_sem); // libera o estudante para agir
 }
 
 void worker_gate_look_buffet() {
@@ -63,8 +63,14 @@ void *worker_gate_run(void *arg) {
     number_students = *((int *)arg);
     all_students_entered = number_students > 0 ? FALSE : TRUE;
 
-    sem_init(&tables_sem, 0, config.tables * config.seat_per_table);
+    pthread_mutex_init(&tables_mutex, NULL);
 
+    // Inicializa o semáforo com o valor total de posições disponíveis
+    sem_init(&tables_sem, 0, config.tables * config.seat_per_table);
+    // Inicializa o semáforo dos buffets e gate
+    sem_init(&gate_sem, 0, config.buffets * 10);
+
+    msleep(5000);
     while (all_students_entered == FALSE) {
         worker_gate_look_queue();
         worker_gate_look_buffet();
@@ -76,7 +82,7 @@ void *worker_gate_run(void *arg) {
 
 void worker_gate_init(worker_gate_t *self) {
     int number_students = globals_get_students();
-    worker_gate_t self = *self;
+    self_thread = *self;
     pthread_create(&self->thread, NULL, worker_gate_run, &number_students);
 }
 
@@ -97,6 +103,4 @@ void worker_gate_insert_queue_buffet(student_t *student) {
     // Pega a fila e manda o student para ela
     queue_t *queue = globals_get_queue();
     queue_insert(queue, student);
-    // Dá um lock para esperar o estudante sair da fila
-    pthread_mutex_lock(&student->mutex);
 }
