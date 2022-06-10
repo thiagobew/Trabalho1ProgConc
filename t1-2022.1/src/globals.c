@@ -1,9 +1,11 @@
 #include "globals.h"
+#include "config.h"
 #include <stdlib.h>
 
 queue_t *students_queue = NULL;
 table_t *table = NULL;
 buffet_t *buffets_ref = NULL;
+config_t *configs = NULL;
 
 int students_number = 0;
 
@@ -37,6 +39,14 @@ void globals_set_buffets(buffet_t *buffets) {
 
 buffet_t *globals_get_buffets() {
     return buffets_ref;
+}
+
+void globals_set_config(config_t *newConfigs) {
+    configs = newConfigs;
+}
+
+config_t *globals_get_config() {
+    return configs;
 }
 
 /**

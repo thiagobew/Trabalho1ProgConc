@@ -1,6 +1,7 @@
 {
     "makefile.extensionOutputFolder": "./.vscode",
     "files.associations": {
-        "config.h": "c"
+        "config.h": "c",
+        "globals.h": "c"
     }
 }

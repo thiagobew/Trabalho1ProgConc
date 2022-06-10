@@ -12,7 +12,8 @@ int all_students_served() {
     }
 
     buffet_t *buffets = globals_get_buffets();
-    for (int i = 0; i < config.buffets; i++) {
+    config_t *configs = globals_get_config();
+    for (int i = 0; i < configs->buffets; i++) {
         for (int j = 0; j < 5; j++) {
             if (buffets[i].queue_left[j] != 0)
                 return 0;
@@ -24,6 +25,7 @@ int all_students_served() {
 }
 
 void *chef_run() {
+    msleep(5000);
     while (all_students_served() == 0) {
         chef_check_food();
     }
@@ -40,7 +42,8 @@ void chef_put_food(sem_t *meal_sem) {
 void chef_check_food() {
     buffet_t *buffets = globals_get_buffets();
 
-    for (int i = 0; i < config.buffets; i++) {
+    config_t *configs = globals_get_config();
+    for (int i = 0; i < configs->buffets; i++) {
         for (int j = 0; j < 5; j++) {
 
             int food_amount;
@@ -48,6 +51,7 @@ void chef_check_food() {
             sem_getvalue(meal_sem, &food_amount);
 
             if (food_amount == 0) {
+                printf("Colocando comida no buffet %d\n", buffets[i]._id);
                 chef_put_food(meal_sem);
             }
         }

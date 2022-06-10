@@ -8,7 +8,7 @@
 
 typedef struct buffet {
     int _id;
-    sem_t _meal_sem[5];
+    sem_t _meal_sem[5]; // Semáforo para fazer o controle da comida (inicializado com 40)
 
     int queue_left[5];
     int queue_right[5];

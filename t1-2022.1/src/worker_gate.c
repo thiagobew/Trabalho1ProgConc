@@ -7,7 +7,6 @@
 worker_gate_t self_thread;
 pthread_mutex_t tables_mutex;
 sem_t tables_sem;
-config_t config;
 
 void worker_gate_look_queue() {
     printf("Queue length: %d\n", globals_get_queue()->_length);
@@ -26,11 +25,14 @@ void worker_gate_remove_student() {
     // Executa um while até encontrar o buffet que está vazio
     // NOTA: Essa função só será executada quando houver certeza que existe um buffet com lugares vazios,
     // então essa situação não se caracteriza como um spin-lock
+
+    printf("Procurando lugar\n");
     while (1) {
         if (buffet_found)
             break;
 
-        for (int i = 0; i < config.buffets; i++) {
+        config_t *configs = globals_get_config();
+        for (int i = 0; i < configs->buffets; i++) {
             if (buffets[i].queue_left[0] == 0) {
                 student->left_or_right = 'L';
                 student->_id_buffet = i;
@@ -48,11 +50,14 @@ void worker_gate_remove_student() {
     }
     // Insere o estudante no buffet encontrado
     buffet_queue_insert(buffets, student);
-    printf("Estudante Liberado ID: %d ID Buffet: %d", student->_id, student->_id_buffet);
+    printf("Estudante ID: %d Liberado para Buffet: %d\n", student->_id, student->_id_buffet);
     sem_post(&student->student_sem); // libera o estudante para agir
 }
 
 void worker_gate_look_buffet() {
+    int quant;
+    sem_getvalue(&gate_sem, &quant);
+    printf("Quant do Gate Sem: %d\n", quant);
     sem_wait(&gate_sem);
 }
 
@@ -65,12 +70,16 @@ void *worker_gate_run(void *arg) {
 
     pthread_mutex_init(&tables_mutex, NULL);
 
-    // Inicializa o semáforo com o valor total de posições disponíveis
-    sem_init(&tables_sem, 0, config.tables * config.seat_per_table);
-    // Inicializa o semáforo dos buffets e gate
-    sem_init(&gate_sem, 0, config.buffets * 10);
-
     msleep(5000);
+    config_t *configs = globals_get_config();
+    // Inicializa o semáforo com o valor total de posições disponíveis
+    sem_init(&tables_sem, 0, configs->tables * configs->seat_per_table);
+    // Inicializa o semáforo dos buffets e gate
+    sem_init(&gate_sem, 0, configs->buffets * 10);
+    int quant;
+    sem_getvalue(&gate_sem, &quant);
+    printf("Quant do Gate Sem: %d\n", quant);
+
     while (all_students_entered == FALSE) {
         worker_gate_look_queue();
         worker_gate_look_buffet();

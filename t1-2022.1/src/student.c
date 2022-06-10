@@ -31,13 +31,15 @@ void *student_run(void *arg) {
 };
 
 void student_seat(student_t *self, table_t *table) {
+    printf("Estudante %d sentando\n", self->_id);
     sem_wait(&tables_sem); // Semáforo com quantos lugares disponíveis tem
     // Mutex para somente 1 estudante procurar lugar por vez
     pthread_mutex_lock(&tables_mutex);
 
+    config_t *configs = globals_get_config();
     // Procura e pega um lugar disponível nas mesas
     table_t *tables = globals_get_table();
-    for (int i = 0; i < config.tables; i++) {
+    for (int i = 0; i < configs->tables; i++) {
         if (tables[i]._empty_seats > 0) {
             // salva o id da mesa em que o estudante está
             self->_id_table = i;
@@ -50,11 +52,9 @@ void student_seat(student_t *self, table_t *table) {
 }
 
 void student_serve(student_t *self) {
-    printf("A\n");
+    // printf("Estudante %d se servindo no Buffet %d\n", self->_id, self->_id_buffet);
     buffet_t *buffets = globals_get_buffets();
-    printf("ID: %d\n", self->_id_buffet);
     buffet_t buffet = buffets[self->_id_buffet];
-    printf("B\n");
 
     while (self->_buffet_position != -1) {
         if (self->_wishes[self->_buffet_position] == 1) {
@@ -62,7 +62,7 @@ void student_serve(student_t *self) {
             sem_wait(&buffet._meal_sem[self->_buffet_position]);
         }
         // Anda na fila
-        buffet_next_step(&buffet, self);
+        buffet_next_step(buffets, self);
     }
 }
 
