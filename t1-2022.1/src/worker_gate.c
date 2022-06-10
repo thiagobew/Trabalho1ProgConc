@@ -9,7 +9,7 @@ pthread_mutex_t tables_mutex;
 sem_t tables_sem;
 
 void worker_gate_look_queue() {
-    printf("Queue length: %d\n", globals_get_queue()->_length);
+    // printf("Queue length: %d\n", globals_get_queue()->_length);
     // if (globals_get_queue()->_length == 0)
     //     worker_gate_finalize(&self_thread);
 }
@@ -26,7 +26,7 @@ void worker_gate_remove_student() {
     // NOTA: Essa função só será executada quando houver certeza que existe um buffet com lugares vazios,
     // então essa situação não se caracteriza como um spin-lock
 
-    printf("Procurando lugar\n");
+    // printf("Procurando lugar\n");
     while (1) {
         if (buffet_found)
             break;
@@ -50,14 +50,14 @@ void worker_gate_remove_student() {
     }
     // Insere o estudante no buffet encontrado
     buffet_queue_insert(buffets, student);
-    printf("Estudante ID: %d Liberado para Buffet: %d\n", student->_id, student->_id_buffet);
+    // printf("Estudante ID: %d Liberado para Buffet: %d\n", student->_id, student->_id_buffet);
     sem_post(&student->student_sem); // libera o estudante para agir
 }
 
 void worker_gate_look_buffet() {
     int quant;
     sem_getvalue(&gate_sem, &quant);
-    printf("Quant do Gate Sem: %d\n", quant);
+    // printf("Quant do Gate Sem: %d\n", quant);
     sem_wait(&gate_sem);
 }
 

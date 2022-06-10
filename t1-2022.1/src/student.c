@@ -31,8 +31,9 @@ void *student_run(void *arg) {
 };
 
 void student_seat(student_t *self, table_t *table) {
-    printf("Estudante %d sentando\n", self->_id);
+    printf("Estudante %d procurando mesa\n", self->_id);
     sem_wait(&tables_sem); // Semáforo com quantos lugares disponíveis tem
+    printf("Estudante %d sentando\n", self->_id);
     // Mutex para somente 1 estudante procurar lugar por vez
     pthread_mutex_lock(&tables_mutex);
 
@@ -49,6 +50,7 @@ void student_seat(student_t *self, table_t *table) {
     }
 
     pthread_mutex_unlock(&tables_mutex);
+    msleep(6000);
 }
 
 void student_serve(student_t *self) {
@@ -58,6 +60,7 @@ void student_serve(student_t *self) {
 
     while (self->_buffet_position != -1) {
         if (self->_wishes[self->_buffet_position] == 1) {
+            msleep(1000);
             // Pega a comida dando wait no semáforo que representa a comida
             sem_wait(&buffet._meal_sem[self->_buffet_position]);
         }

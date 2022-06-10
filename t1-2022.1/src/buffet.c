@@ -16,7 +16,7 @@ void *buffet_run(void *arg) {
         /* Máximo de porções por bacia (40 unidades). */
         _log_buffet(self);
 
-        msleep(5000); /* Pode retirar este sleep quando implementar a solução! */
+        msleep(1000); /* Pode retirar este sleep quando implementar a solução! */
     }
 
     // Destrói o semáforo de cada comida

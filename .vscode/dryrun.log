@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/vulcano/vulcano/UFSC/concorrente/T1'
+make: Leaving directory '/home/vulcano/vulcano/UFSC/concorrente/T1'
+ 
+make: *** No targets specified and no makefile found.  Stop.
+
