@@ -14,8 +14,8 @@ int all_students_served() {
     }
 
     buffet_t *buffets = globals_get_buffets();
-    config_t *configs = globals_get_config();
-    for (int i = 0; i < configs->buffets; i++) {
+    int number_of_buffets = globals_get_number_of_buffets();
+    for (int i = 0; i < number_of_buffets; i++) {
         for (int j = 0; j < 5; j++) {
             if (buffets[i].queue_left[j] != 0)
                 return 0;
@@ -44,8 +44,8 @@ void chef_put_food(sem_t *meal_sem) {
 void chef_check_food() {
     buffet_t *buffets = globals_get_buffets();
 
-    config_t *configs = globals_get_config();
-    for (int i = 0; i < configs->buffets; i++) {
+    int number_of_buffets = globals_get_number_of_buffets();
+    for (int i = 0; i < number_of_buffets; i++) {
         for (int j = 0; j < 5; j++) {
 
             int food_amount;

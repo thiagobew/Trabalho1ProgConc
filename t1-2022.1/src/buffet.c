@@ -1,5 +1,6 @@
 #include "buffet.h"
 #include "config.h"
+#include "globals.h"
 #include <semaphore.h>
 #include <stdlib.h>
 
@@ -15,7 +16,7 @@ void *buffet_run(void *arg) {
         /* Máximo de porções por bacia (40 unidades). */
         _log_buffet(self);
 
-        msleep(1000); /* Pode retirar este sleep quando implementar a solução! */
+        msleep(5000); /* Pode retirar este sleep quando implementar a solução! */
     }
 
     // Destrói o semáforo de cada comida
@@ -27,6 +28,8 @@ void *buffet_run(void *arg) {
 
 void buffet_init(buffet_t *self, int number_of_buffets) {
     int i = 0, j = 0;
+    globals_set_number_of_buffets(number_of_buffets);
+
     for (i = 0; i < number_of_buffets; i++) {
         /*A fila possui um ID*/
         self[i]._id = i;

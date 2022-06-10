@@ -81,4 +81,30 @@ extern void globals_set_buffets(buffet_t *buffets_ref);
  */
 extern buffet_t *globals_get_buffets();
 
+/**
+ * @brief Seta o numero de mesas (de modo global)
+ *
+ */
+extern void globals_set_number_of_tables(int number_tables);
+
+/**
+ * @brief Retorna a quantidade de mesas (de modo global)
+ *
+ * @return buffet_t*
+ */
+extern int globals_get_number_of_tables();
+
+/**
+ * @brief Seta o numero de buffets (de modo global)
+ *
+ */
+extern void globals_set_number_of_buffets(int number_of_buffets);
+
+/**
+ * @brief Retorna a quantidade de buffets (de modo global)
+ *
+ * @return buffet_t*
+ */
+extern int globals_get_number_of_buffets();
+
 #endif

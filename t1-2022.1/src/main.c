@@ -94,8 +94,6 @@ int main(int argc, char **argv) {
         return 0;
     }
 
-    globals_set_config(&config);
-
     /* Aloca memória para threads da estrutura do restaurante */
     _configure_restaurant(config.buffets);
 

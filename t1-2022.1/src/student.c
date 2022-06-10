@@ -36,10 +36,10 @@ void student_seat(student_t *self, table_t *table) {
     // Mutex para somente 1 estudante procurar lugar por vez
     pthread_mutex_lock(&tables_mutex);
 
-    config_t *configs = globals_get_config();
+    int quant_mesas = globals_get_number_of_tables();
     // Procura e pega um lugar disponível nas mesas
     table_t *tables = globals_get_table();
-    for (int i = 0; i < configs->tables; i++) {
+    for (int i = 0; i < quant_mesas; i++) {
         if (tables[i]._empty_seats > 0) {
             // salva o id da mesa em que o estudante está
             self->_id_table = i;

@@ -31,8 +31,8 @@ void worker_gate_remove_student() {
         if (buffet_found)
             break;
 
-        config_t *configs = globals_get_config();
-        for (int i = 0; i < configs->buffets; i++) {
+        int number_of_buffets = globals_get_number_of_buffets();
+        for (int i = 0; i < number_of_buffets; i++) {
             if (buffets[i].queue_left[0] == 0) {
                 student->left_or_right = 'L';
                 student->_id_buffet = i;
@@ -69,13 +69,15 @@ void *worker_gate_run(void *arg) {
     all_students_entered = number_students > 0 ? FALSE : TRUE;
 
     pthread_mutex_init(&tables_mutex, NULL);
-
     msleep(5000);
-    config_t *configs = globals_get_config();
+    int number_of_buffets = globals_get_number_of_buffets();
+    int number_of_tables = globals_get_number_of_tables();
+    int seats_per_table = globals_get_table()->_max_seats;
+
     // Inicializa o semáforo com o valor total de posições disponíveis
-    sem_init(&tables_sem, 0, configs->tables * configs->seat_per_table);
+    sem_init(&tables_sem, 0, number_of_tables * seats_per_table);
     // Inicializa o semáforo dos buffets e gate
-    sem_init(&gate_sem, 0, configs->buffets * 10);
+    sem_init(&gate_sem, 0, number_of_buffets * 10);
     int quant;
     sem_getvalue(&gate_sem, &quant);
     printf("Quant do Gate Sem: %d\n", quant);
