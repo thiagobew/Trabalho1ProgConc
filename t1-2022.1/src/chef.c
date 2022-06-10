@@ -7,8 +7,10 @@
 // Verifica se todos os estudantes já se serviram
 int all_students_served() {
     queue_t *queue = globals_get_queue();
-    if (queue->_length > 0) {
-        return 0;
+    if (!(queue == NULL)) {
+        if (queue->_length > 0) {
+            return 0;
+        }
     }
 
     buffet_t *buffets = globals_get_buffets();

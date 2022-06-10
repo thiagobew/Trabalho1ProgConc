@@ -29,6 +29,7 @@ void queue_finalize(queue_t *self) {
 
     /*Finalmente, destroi a fila.*/
     free(self);
+    self = NULL;
 }
 
 queue_t *queue_insert(queue_t *self, student_t *student) {

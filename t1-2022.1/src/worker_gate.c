@@ -10,8 +10,8 @@ sem_t tables_sem;
 
 void worker_gate_look_queue() {
     printf("Queue length: %d\n", globals_get_queue()->_length);
-    if (globals_get_queue()->_length == 0)
-        worker_gate_finalize(&self_thread);
+    // if (globals_get_queue()->_length == 0)
+    //     worker_gate_finalize(&self_thread);
 }
 
 void worker_gate_remove_student() {
@@ -84,6 +84,9 @@ void *worker_gate_run(void *arg) {
         worker_gate_look_queue();
         worker_gate_look_buffet();
         worker_gate_remove_student();
+
+        number_students--;
+        all_students_entered = number_students > 0 ? FALSE : TRUE;
     }
 
     pthread_exit(NULL);
@@ -96,14 +99,14 @@ void worker_gate_init(worker_gate_t *self) {
 }
 
 void worker_gate_finalize(worker_gate_t *self) {
-    // Finaliza a fila
-    queue_t *queue = globals_get_queue();
-    queue_finalize(queue);
     // Destroi o semáforo e mutex das tables
     sem_destroy(&tables_sem);
     pthread_mutex_destroy(&tables_mutex);
     // Finaliza
     pthread_join(self->thread, NULL);
+    // Finaliza a fila
+    queue_t *queue = globals_get_queue();
+    queue_finalize(queue);
     free(self);
 }
 

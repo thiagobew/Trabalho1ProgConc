@@ -75,6 +75,7 @@ void student_leave(student_t *self, table_t *table) {
 
     pthread_mutex_unlock(&tables_mutex);
     sem_post(&tables_sem); // Libera o semáforo de lugares disponíveis
+    printf("Estudante %d saindo\n", self->_id);
 }
 
 /* --------------------------------------------------------- */

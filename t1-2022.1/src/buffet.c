@@ -15,7 +15,7 @@ void *buffet_run(void *arg) {
         /* Máximo de porções por bacia (40 unidades). */
         _log_buffet(self);
 
-        msleep(10000); /* Pode retirar este sleep quando implementar a solução! */
+        msleep(1000); /* Pode retirar este sleep quando implementar a solução! */
     }
 
     // Destrói o semáforo de cada comida
@@ -107,16 +107,15 @@ void buffet_next_step(buffet_t *self, student_t *student) {
             pthread_mutex_unlock(&buffet_student->queue_right_mutex[position]);
         }
     } else {
+
+        printf("Estudante %d terminou de servir!\n", student->_id);
+
         /* Se estudante não precisa mais de comida, então ele sai do buffet */
         if (student->left_or_right == 'L') {
-            pthread_mutex_lock(&buffet_student->queue_left_mutex[4]);
-
             buffet_student->queue_left[4] = 0;
 
             pthread_mutex_unlock(&buffet_student->queue_left_mutex[4]);
         } else {
-            pthread_mutex_lock(&buffet_student->queue_right_mutex[4]);
-
             buffet_student->queue_right[4] = 0;
 
             pthread_mutex_unlock(&buffet_student->queue_right_mutex[4]);
