@@ -111,7 +111,7 @@ void buffet_next_step(buffet_t *self, student_t *student) {
         }
     } else {
 
-        printf("Estudante %d terminou de servir!\n", student->_id);
+        // printf("Estudante %d terminou de servir!\n", student->_id);
 
         /* Se estudante não precisa mais de comida, então ele sai do buffet */
         if (student->left_or_right == 'L') {
