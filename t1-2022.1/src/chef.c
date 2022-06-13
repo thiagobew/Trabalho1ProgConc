@@ -4,10 +4,17 @@
 #include <semaphore.h>
 #include <stdlib.h>
 
+sem_t quant_buffets_initialized_sem;
+
 void *chef_run() {
-    // Msleep impede all_students_served de tentar acessar buffets que ainda não existem
-    // msleep(1000);
+    sem_init(&quant_buffets_initialized_sem, 0, 0);
+
+    int quant_buffets = globals_get_number_of_buffets();
+    for (int i = 0; i < quant_buffets; i++)
+        sem_wait(&quant_buffets_initialized_sem);
+
     while (all_students_served() == 0) {
+        printf("Passou\n");
         chef_check_food();
     }
 
@@ -22,8 +29,6 @@ void chef_put_food(sem_t *meal_sem) {
 
 void chef_check_food() {
     buffet_t *buffets = globals_get_buffets();
-    while (buffets == NULL)
-        buffets = globals_get_buffets();
 
     int number_of_buffets = globals_get_number_of_buffets();
     for (int i = 0; i < number_of_buffets; i++) {

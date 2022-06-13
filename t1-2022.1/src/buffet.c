@@ -1,4 +1,5 @@
 #include "buffet.h"
+#include "chef.h"
 #include "config.h"
 #include "globals.h"
 #include <semaphore.h>
@@ -6,9 +7,11 @@
 
 // Semáforo único usado pelo worker_gate e pelos buffets
 sem_t gate_sem;
+sem_t quant_buffets_initialized_sem;
 
 void *buffet_run(void *arg) {
     buffet_t *self = (buffet_t *)arg;
+    sem_post(&quant_buffets_initialized_sem);
 
     int done = 0;
     while (done == 0) {
@@ -30,7 +33,7 @@ void *buffet_run(void *arg) {
             }
         }
 
-        // msleep(1000); /* Pode retirar este sleep quando implementar a solução! */
+        msleep(500); /* Pode retirar este sleep quando implementar a solução! */
     }
 
     // Destrói o semáforo de cada comida
