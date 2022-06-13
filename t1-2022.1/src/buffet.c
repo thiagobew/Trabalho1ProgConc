@@ -8,10 +8,11 @@
 sem_t gate_sem;
 
 void *buffet_run(void *arg) {
-    int all_students_entered = FALSE;
     buffet_t *self = (buffet_t *)arg;
-    /*  O buffet funciona enquanto houver alunos na fila externa. */
-    while (all_students_entered == FALSE) {
+
+    msleep(100);
+    /*  O buffet funciona enquanto houver alunos na fila externa ou se servindo */
+    while (all_students_served() == 0) {
         /* Cada buffet possui: Arroz, Feijão, Acompanhamento, Proteína e Salada */
         /* Máximo de porções por bacia (40 unidades). */
         _log_buffet(self);
@@ -80,9 +81,8 @@ void buffet_next_step(buffet_t *self, student_t *student) {
     // Ponteiro para o buffet do estudante
     buffet_t *buffet_student = self + student->_id_buffet;
 
-    /* Se estudante ainda precisa se servir de mais alguma coisa... */
+    /* Se estudante ainda precisa se servir de mais alguma coisa */
     if (student->_buffet_position + 1 < 5) {
-        // printf("Estudante %d avançando na fila, pos: %d\n", student->_id, student->_buffet_position);
         /* Está na fila esquerda? */
         if (student->left_or_right == 'L') {
             /* Caminha para a posição seguinte da fila do buffet.*/
@@ -90,8 +90,6 @@ void buffet_next_step(buffet_t *self, student_t *student) {
             // Lock no Mutex da próxima posição para esperar o próximo estudante
             pthread_mutex_lock(&buffet_student->queue_left_mutex[position + 1]);
 
-            // int *ids_left = buffet_student->queue_left;
-            // printf("\n\n\u250F\u2501 Queue left Student: [ %d %d %d %d %d ]\n", ids_left[0], ids_left[1], ids_left[2], ids_left[3], ids_left[4]);
             buffet_student->queue_left[position] = 0;
             buffet_student->queue_left[position + 1] = student->_id;
             student->_buffet_position = student->_buffet_position + 1;
@@ -110,22 +108,19 @@ void buffet_next_step(buffet_t *self, student_t *student) {
             pthread_mutex_unlock(&buffet_student->queue_right_mutex[position]);
         }
     } else {
-
-        // printf("Estudante %d terminou de servir!\n", student->_id);
-
         /* Se estudante não precisa mais de comida, então ele sai do buffet */
         if (student->left_or_right == 'L') {
+            // Libera a posição em que estava, a ultima do buffet
             buffet_student->queue_left[4] = 0;
-
             pthread_mutex_unlock(&buffet_student->queue_left_mutex[4]);
         } else {
+            // Libera a posição em que estava, a ultima do buffet
             buffet_student->queue_right[4] = 0;
-
             pthread_mutex_unlock(&buffet_student->queue_right_mutex[4]);
         }
 
         student->_buffet_position = -1;
-        // Libera um espaço
+        // Libera um espaço no buffet para o gate mandar outro estudante
         sem_post(&gate_sem);
     }
 }

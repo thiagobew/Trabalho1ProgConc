@@ -5,14 +5,22 @@
 queue_t *students_queue = NULL;
 table_t *table = NULL;
 buffet_t *buffets_ref = NULL;
-config_t *configs = NULL;
 
 int students_number = 0;
 int number_of_buffets = 0;
 int number_of_tables = 0;
+int seats_per_table = 0;
 
 int globals_get_number_of_tables() {
     return number_of_tables;
+}
+
+void globals_set_seats_per_table(int number) {
+    seats_per_table = number;
+}
+
+int globals_get_seats_per_table() {
+    return seats_per_table;
 }
 
 void globals_set_number_of_tables(int quant_tables) {
@@ -59,13 +67,34 @@ buffet_t *globals_get_buffets() {
     return buffets_ref;
 }
 
-void globals_set_config(config_t *newConfigs) {
-    configs = newConfigs;
+void wait_structures_to_start() {
+    while (table == NULL || students_queue == NULL || buffets_ref == NULL) {
+    }
+    return;
 }
 
-config_t *globals_get_config() {
-    return configs;
+// Verifica se todos os estudantes já se serviram
+int all_students_served() {
+    queue_t *queue = globals_get_queue();
+    if (!(queue == NULL)) {
+        if (queue->_length > 0) {
+            return 0;
+        }
+    }
+
+    buffet_t *buffets = globals_get_buffets();
+    int number_of_buffets = globals_get_number_of_buffets();
+    for (int i = 0; i < number_of_buffets; i++) {
+        for (int j = 0; j < 5; j++) {
+            if (buffets[i].queue_left[j] != 0)
+                return 0;
+            if (buffets[i].queue_right[j] != 0)
+                return 0;
+        }
+    }
+    return 1;
 }
+
 /**
  * @brief Finaliza todas as variáveis globais que ainda não foram liberadas.
  *  Se criar alguma variável global que faça uso de mallocs, lembre-se sempre de usar o free dentro

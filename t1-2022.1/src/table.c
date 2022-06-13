@@ -9,6 +9,7 @@
 table_t *table_init(int number_of_tables, int seats_per_table) {
     table_t *new_tables = malloc(sizeof(table_t) * number_of_tables);
     globals_set_number_of_tables(number_of_tables);
+    globals_set_seats_per_table(seats_per_table);
 
     for (int i = 0; i < number_of_tables; i++) {
         new_tables[i]._id = i;

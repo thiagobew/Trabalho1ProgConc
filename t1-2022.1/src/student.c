@@ -31,9 +31,7 @@ void *student_run(void *arg) {
 };
 
 void student_seat(student_t *self, table_t *table) {
-    // printf("Estudante %d procurando mesa\n", self->_id);
     sem_wait(&tables_sem); // Semáforo com quantos lugares disponíveis tem
-    // printf("Estudante %d sentando\n", self->_id);
     // Mutex para somente 1 estudante procurar lugar por vez
     pthread_mutex_lock(&tables_mutex);
 
@@ -54,7 +52,6 @@ void student_seat(student_t *self, table_t *table) {
 }
 
 void student_serve(student_t *self) {
-    // printf("Estudante %d se servindo no Buffet %d\n", self->_id, self->_id_buffet);
     buffet_t *buffets = globals_get_buffets();
     buffet_t *buffet_student = buffets + self->_id_buffet;
 
@@ -78,7 +75,6 @@ void student_leave(student_t *self, table_t *table) {
 
     pthread_mutex_unlock(&tables_mutex);
     sem_post(&tables_sem); // Libera o semáforo de lugares disponíveis
-    // printf("Estudante %d saindo\n", self->_id);
 }
 
 /* --------------------------------------------------------- */
