@@ -7,12 +7,9 @@
 worker_gate_t self_thread;
 pthread_mutex_t tables_mutex;
 sem_t tables_sem;
+sem_t threads_sem;
 
-void worker_gate_look_queue() {
-    // printf("Queue length: %d\n", globals_get_queue()->_length);
-    // if (globals_get_queue()->_length == 0)
-    //     worker_gate_finalize(&self_thread);
-}
+void worker_gate_look_queue() {}
 
 void worker_gate_remove_student() {
     // Pega o array de buffets
@@ -26,12 +23,13 @@ void worker_gate_remove_student() {
     // NOTA: Essa função só será executada quando houver certeza que existe um buffet com lugares vazios,
     // então essa situação não se caracteriza como um spin-lock
 
-    // printf("Procurando lugar\n");
     while (1) {
         if (buffet_found)
             break;
 
         int number_of_buffets = globals_get_number_of_buffets();
+
+        // Procura pelo primeiro buffet com a primeira posição livre (em qualquer uma das duas filas)
         for (int i = 0; i < number_of_buffets; i++) {
             if (buffets[i].queue_left[0] == 0) {
                 student->left_or_right = 'L';
@@ -50,37 +48,55 @@ void worker_gate_remove_student() {
     }
     // Insere o estudante no buffet encontrado
     buffet_queue_insert(buffets, student);
-    // printf("Estudante ID: %d Liberado para Buffet: %d\n", student->_id, student->_id_buffet);
-    sem_post(&student->student_sem); // libera o estudante para agir
+    // Solta o semáforo dentor do estudante que o estava prendendo
+    sem_post(&student->student_sem);
 }
 
 void worker_gate_look_buffet() {
-    int quant;
-    sem_getvalue(&gate_sem, &quant);
-    // printf("Quant do Gate Sem: %d\n", quant);
     sem_wait(&gate_sem);
 }
 
+void release_all_threads(int quant_threads) {
+    int *barreira = globals_get_barreira();
+    int all_ready = 0;
+
+    while (1) {
+        if (all_ready == 1)
+            break;
+
+        all_ready = 1;
+        for (int i = 0; i < quant_threads; i++) {
+            if (barreira[i] == 0)
+                all_ready = 0;
+        }
+    }
+
+    for (int i = 0; i < quant_threads; i++)
+        sem_post(&threads_sem);
+}
+
 void *worker_gate_run(void *arg) {
+    int number_of_buffets = globals_get_number_of_buffets();
+    // Inicializando barreira
+    int quant_threads = number_of_buffets + 2;
+    //  globals_set_barreira(quant_threads);
+    //  Buffets + Chef + Worker gate threads
+    sem_init(&threads_sem, 0, 0);
+
+    int *barreira = globals_get_barreira();
+
     int all_students_entered;
     int number_students;
-
     number_students = *((int *)arg);
     all_students_entered = number_students > 0 ? FALSE : TRUE;
 
     pthread_mutex_init(&tables_mutex, NULL);
-    msleep(5000);
-    int number_of_buffets = globals_get_number_of_buffets();
-    int number_of_tables = globals_get_number_of_tables();
-    int seats_per_table = globals_get_table()->_max_seats;
-
-    // Inicializa o semáforo com o valor total de posições disponíveis
-    sem_init(&tables_sem, 0, number_of_tables * seats_per_table);
     // Inicializa o semáforo dos buffets e gate
     sem_init(&gate_sem, 0, number_of_buffets * 10);
-    int quant;
-    sem_getvalue(&gate_sem, &quant);
-    printf("Quant do Gate Sem: %d\n", quant);
+
+    // penúltima posição da barreira para o worker gate
+    barreira[number_of_buffets] = 1;
+    release_all_threads(quant_threads);
 
     while (all_students_entered == FALSE) {
         worker_gate_look_queue();
@@ -101,9 +117,6 @@ void worker_gate_init(worker_gate_t *self) {
 }
 
 void worker_gate_finalize(worker_gate_t *self) {
-    // Destroi o semáforo e mutex das tables
-    sem_destroy(&tables_sem);
-    pthread_mutex_destroy(&tables_mutex);
     // Finaliza
     pthread_join(self->thread, NULL);
     // Finaliza a fila

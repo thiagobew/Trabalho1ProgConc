@@ -7,7 +7,7 @@ make -C /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/src all
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Jun  9 19:13:59 2022
+# Make data base, printed on Mon Jun 13 09:30:28 2022
 
 # Variables
 
@@ -62,11 +62,11 @@ MAKE_HOST := x86_64-pc-linux-gnu
 # environment
 RELEASE = true
 # environment
-PATH = /home/vulcano/.vscode-server/bin/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5/bin/remote-cli:/home/vulcano/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/v/Programas/Python/Scripts/:/mnt/v/Programas/Python/:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/v/Programas/Xammp/php:/mnt/v/Programas/PHP8_1_4:/mnt/v/Programas/Git/cmd:/mnt/v/Programas/Node/:/mnt/c/ProgramData/chocolatey/bin:/mnt/v/Programas/MinGW/bin:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/DockerDesktop/version-bin:/mnt/c/Program Files/MySQL/MySQL Shell 8.0/bin/:/mnt/c/Users/rafae/AppData/Local/Microsoft/WindowsApps:/mnt/v/Programas/VSCode/Microsoft VS Code/bin:/mnt/v/Programas/Heroku/bin:/mnt/c/Users/rafae/AppData/Roaming/npm:/mnt/c/Users/rafae/.dotnet/tools:/snap/bin
+PATH = /home/vulcano/.vscode-server/bin/4af164ea3a06f701fe3e89a2bcbb421d2026b68f/bin/remote-cli:/home/vulcano/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/v/Programas/Python/Scripts/:/mnt/v/Programas/Python/:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/v/Programas/Xammp/php:/mnt/v/Programas/PHP8_1_4:/mnt/v/Programas/Git/cmd:/mnt/v/Programas/Node/:/mnt/c/ProgramData/chocolatey/bin:/mnt/v/Programas/MinGW/bin:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/DockerDesktop/version-bin:/mnt/c/Program Files/MySQL/MySQL Shell 8.0/bin/:/mnt/c/Users/rafae/AppData/Local/Microsoft/WindowsApps:/mnt/v/Programas/VSCode/Microsoft VS Code/bin:/mnt/v/Programas/Heroku/bin:/mnt/c/Users/rafae/AppData/Roaming/npm:/mnt/c/Users/rafae/.dotnet/tools:/snap/bin
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-e2e87094-c39e-43c6-8aa2-0e30f44e311b.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-d0abd5e5-d9ac-4602-bf61-adf40fe0a499.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -82,9 +82,9 @@ PWD = /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/17772_interop
+WSL_INTEROP = /run/WSL/12587_interop
 # environment
-WT_SESSION = bc7d8999-1ba2-443e-a219-c5c93c2a0bc5
+WT_SESSION = 99c7d9b7-0727-42db-b6aa-07b284695a58
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -173,8 +173,10 @@ TERM = xterm-256color
 VSCODE_EXTHOST_WILL_SEND_SOCKET = true
 # environment
 WSL_DISTRO_NAME = Ubuntu
+# environment
+MOTD_SHOWN = update-motd
 # variable set hash-table stats:
-# Load=81/1024=8%, Rehash=0, Collisions=7/148=5%
+# Load=82/1024=8%, Rehash=0, Collisions=8/153=5%
 
 # Pattern-specific Variable Values
 
@@ -182,10 +184,10 @@ WSL_DISTRO_NAME = Ubuntu
 
 # Directories
 
-# . (device 2080, inode 44742): 12 files, no impossibilities.
+# . (device 2080, inode 44742): 21 files, no impossibilities.
 # /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include (device 2080, inode 44733): 10 files, no impossibilities.
 
-# 22 files, no impossibilities in 2 directories.
+# 31 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
@@ -201,7 +203,7 @@ WSL_DISTRO_NAME = Ubuntu
 # Not a target:
 /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/buffet.h:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-07 20:17:42.640715
+#  Last modified 2022-06-10 10:33:40.701755
 #  File has been updated.
 #  Successfully updated.
 
@@ -212,20 +214,41 @@ WSL_DISTRO_NAME = Ubuntu
 #  File has been updated.
 #  Successfully updated.
 
-# Not a target:
-table.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+table.o: table.c /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/globals.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/buffet.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/worker_gate.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/config.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/table.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/student.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/queue.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/chef.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'table'
+#  Last modified 2022-06-10 12:31:11.814834
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from '/home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/build/makefile.executable', line 55):
+	@echo [CC] $@
+	@$(CC) $(CFLAGS) $< -c -o $@
 
 all: config.o buffet.o worker_gate.o queue.o table.o globals.o main.o student.o chef.o
 #  Command line target.
 #  Implicit rule search has not been done.
+#  Implicit/static pattern stem: ''
 #  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
+# automatic
+# @ := all
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := config.o buffet.o worker_gate.o queue.o table.o globals.o main.o student.o chef.o
+# automatic
+# | := 
+# automatic
+# < := config.o
+# automatic
+# ^ := config.o buffet.o worker_gate.o queue.o table.o globals.o main.o student.o chef.o
+# automatic
+# ? := config.o buffet.o worker_gate.o queue.o table.o globals.o main.o student.o chef.o
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/7=0%
+# Load=8/32=25%, Rehash=0, Collisions=7/19=37%
 #  recipe to execute (from '/home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/build/makefile.executable', line 28):
 	@echo [CC] $(EXEC)
 	@$(CC) $(LDFLAGS) -o $(ROOTDIR)/$(EXEC) $(OBJ) $(LIBS)
@@ -233,27 +256,9 @@ all: config.o buffet.o worker_gate.o queue.o table.o globals.o main.o student.o 
 config.o: config.c /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/globals.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/buffet.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/worker_gate.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/config.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/table.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/student.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/queue.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/chef.h
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'config'
-#  File does not exist.
+#  Last modified 2022-06-10 12:27:26.663787
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := config.o
-# automatic
-# % := 
-# automatic
-# * := config
-# automatic
-# + := config.c /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/globals.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/buffet.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/worker_gate.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/config.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/table.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/student.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/queue.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/chef.h
-# automatic
-# | := 
-# automatic
-# < := config.c
-# automatic
-# ^ := config.c /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/globals.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/buffet.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/worker_gate.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/config.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/table.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/student.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/queue.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/chef.h
-# automatic
-# ? := config.c /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/globals.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/buffet.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/worker_gate.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/config.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/table.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/student.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/queue.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/chef.h
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=1/18=6%
+#  Successfully updated.
 #  recipe to execute (from '/home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/build/makefile.executable', line 55):
 	@echo [CC] $@
 	@$(CC) $(CFLAGS) $< -c -o $@
@@ -266,25 +271,53 @@ config.o: config.c /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/g
 #  Successfully updated.
 
 # Not a target:
-student.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+main.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-10 14:51:32.500569
+#  File has been updated.
+#  Successfully updated.
+
+student.o: student.c /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/globals.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/buffet.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/worker_gate.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/config.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/table.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/student.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/queue.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/chef.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'student'
+ 
+#  Last modified 2022-06-10 15:33:58.758422
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from '/home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/build/makefile.executable', line 55):
+	@echo [CC] $@
+	@$(CC) $(CFLAGS) $< -c -o $@
 
 distclean: clean
 #  Implicit rule search has not been done.
 #  Modification time never checked.
- 
 #  File has not been updated.
 #  recipe to execute (from '/home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/build/makefile.executable', line 46):
 	@echo [CLEAN] $(EXEC)
 	@rm -rf $(ROOTDIR)/$(EXEC)
 
 # Not a target:
-queue.o:
+queue.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-10 11:49:38.079743
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.SUFFIXES:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+
+queue.o: queue.c /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/globals.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/buffet.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/worker_gate.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/config.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/table.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/student.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/queue.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/chef.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'queue'
+#  Last modified 2022-06-10 12:27:48.385299
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from '/home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/build/makefile.executable', line 55):
+	@echo [CC] $@
+	@$(CC) $(CFLAGS) $< -c -o $@
 
 # Not a target:
 Makefile:
@@ -300,35 +333,61 @@ Makefile:
 #  File has been updated.
 #  Successfully updated.
 
-# Not a target:
-chef.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+chef.o: chef.c /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/globals.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/buffet.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/worker_gate.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/config.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/table.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/student.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/queue.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/chef.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'chef'
+#  Last modified 2022-06-10 12:30:21.252938
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from '/home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/build/makefile.executable', line 55):
+	@echo [CC] $@
+	@$(CC) $(CFLAGS) $< -c -o $@
 
 # Not a target:
-config.c:
+table.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-06 19:55:09.741369
+#  Last modified 2022-06-10 12:31:08.994834
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
-worker_gate.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+config.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-09 21:41:25.199597
+#  File has been updated.
+#  Successfully updated.
+
+worker_gate.o: worker_gate.c /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/globals.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/buffet.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/worker_gate.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/config.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/table.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/student.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/queue.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/chef.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'worker_gate'
+#  Last modified 2022-06-10 14:49:30.353244
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from '/home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/build/makefile.executable', line 55):
+	@echo [CC] $@
+	@$(CC) $(CFLAGS) $< -c -o $@
 
 # Not a target:
-globals.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+student.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-10 15:33:53.018422
+#  File has been updated.
+#  Successfully updated.
+
+globals.o: globals.c /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/globals.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/buffet.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/worker_gate.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/config.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/table.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/student.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/queue.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/chef.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'globals'
+#  Last modified 2022-06-10 12:30:21.162938
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from '/home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/build/makefile.executable', line 55):
+	@echo [CC] $@
+	@$(CC) $(CFLAGS) $< -c -o $@
 
 # Not a target:
 /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/worker_gate.h:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-02 20:28:34.555378
+#  Last modified 2022-06-09 20:25:04.230397
 #  File has been updated.
 #  Successfully updated.
 
@@ -338,16 +397,20 @@ globals.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-buffet.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+buffet.o: buffet.c /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/globals.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/buffet.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/worker_gate.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/config.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/table.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/student.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/queue.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/chef.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'buffet'
+#  Last modified 2022-06-10 15:23:19.286584
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from '/home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/build/makefile.executable', line 55):
+	@echo [CC] $@
+	@$(CC) $(CFLAGS) $< -c -o $@
 
 # Not a target:
 /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/globals.h:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-02 20:28:34.555378
+#  Last modified 2022-06-10 12:27:23.893787
 #  File has been updated.
 #  Successfully updated.
 
@@ -367,22 +430,54 @@ clean:
 #  Successfully updated.
 
 # Not a target:
-/home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/student.h:
+chef.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-07 20:54:39.514831
+#  Last modified 2022-06-10 12:30:18.202938
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
-main.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+/home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/student.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-09 20:51:28.455431
+#  File has been updated.
+#  Successfully updated.
+
+main.o: main.c /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/globals.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/buffet.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/worker_gate.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/config.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/table.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/student.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/queue.h /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/include/chef.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'main'
+#  Last modified 2022-06-10 14:51:50.870569
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from '/home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/build/makefile.executable', line 55):
+	@echo [CC] $@
+	@$(CC) $(CFLAGS) $< -c -o $@
+
+# Not a target:
+worker_gate.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-10 14:49:26.429146
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+globals.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-10 12:28:45.508369
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/build/makefile.executable:
 #  Implicit rule search has been done.
 #  Last modified 2022-06-02 20:28:34.555378
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+buffet.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-10 15:23:16.036584
 #  File has been updated.
 #  Successfully updated.
 
@@ -394,20 +489,20 @@ main.o:
 #  Successfully updated.
 
 # files hash-table stats:
-# Load=26/1024=3%, Rehash=0, Collisions=4/68=6%
+# Load=34/1024=3%, Rehash=0, Collisions=23/229=10%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 51 / storage = 1162 B / avg = 22 B
-# current buf: size = 8162 B / used = 1162 B / count = 51 / avg = 22 B
+# strcache buffers: 1 (0) / strings = 59 / storage = 1219 B / avg = 20 B
+# current buf: size = 8162 B / used = 1219 B / count = 59 / avg = 20 B
 
-# strcache performance: lookups = 82 / hit rate = 37%
+# strcache performance: lookups = 244 / hit rate = 75%
 # hash-table stats:
-# Load=51/8192=1%, Rehash=0, Collisions=2/82=2%
-# Finished Make data base on Thu Jun  9 19:13:59 2022
+# Load=59/8192=1%, Rehash=0, Collisions=2/244=1%
+# Finished Make data base on Mon Jun 13 09:30:28 2022
 
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
@@ -416,7 +511,7 @@ main.o:
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Jun  9 19:13:59 2022
+# Make data base, printed on Mon Jun 13 09:30:28 2022
 
 # Variables
 
@@ -465,14 +560,15 @@ MAKE_HOST := x86_64-pc-linux-gnu
 # makefile (from 'Makefile', line 38)
 RELEASE = true
 # environment
-PATH = /home/vulcano/.vscode-server/bin/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5/bin/remote-cli:/home/vulcano/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/v/Programas/Python/Scripts/:/mnt/v/Programas/Python/:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/v/Programas/Xammp/php:/mnt/v/Programas/PHP8_1_4:/mnt/v/Programas/Git/cmd:/mnt/v/Programas/Node/:/mnt/c/ProgramData/chocolatey/bin:/mnt/v/Programas/MinGW/bin:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/DockerDesktop/version-bin:/mnt/c/Program Files/MySQL/MySQL Shell 8.0/bin/:/mnt/c/Users/rafae/AppData/Local/Microsoft/WindowsApps:/mnt/v/Programas/VSCode/Microsoft VS Code/bin:/mnt/v/Programas/Heroku/bin:/mnt/c/Users/rafae/AppData/Roaming/npm:/mnt/c/Users/rafae/.dotnet/tools:/snap/bin
+PATH = /home/vulcano/.vscode-server/bin/4af164ea3a06f701fe3e89a2bcbb421d2026b68f/bin/remote-cli:/home/vulcano/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/v/Programas/Python/Scripts/:/mnt/v/Programas/Python/:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/v/Programas/Xammp/php:/mnt/v/Programas/PHP8_1_4:/mnt/v/Programas/Git/cmd:/mnt/v/Programas/Node/:/mnt/c/ProgramData/chocolatey/bin:/mnt/v/Programas/MinGW/bin:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/DockerDesktop/version-bin:/mnt/c/Program Files/MySQL/MySQL Shell 8.0/bin/:/mnt/c/Users/rafae/AppData/Local/Microsoft/WindowsApps:/mnt/v/Programas/VSCode/Microsoft VS Code/bin:/mnt/v/Programas/Heroku/bin:/mnt/c/Users/rafae/AppData/Roaming/npm:/mnt/c/Users/rafae/.dotnet/tools:/snap/bin
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-e2e87094-c39e-43c6-8aa2-0e30f44e311b.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-d0abd5e5-d9ac-4602-bf61-adf40fe0a499.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
+ 
 LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
 # makefile (from 'Makefile', line 51)
 SRCDIR := /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1/src
@@ -485,9 +581,9 @@ PWD = /home/vulcano/vulcano/UFSC/concorrente/T1/t1-2022.1
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/17772_interop
+WSL_INTEROP = /run/WSL/12587_interop
 # environment
-WT_SESSION = bc7d8999-1ba2-443e-a219-c5c93c2a0bc5
+WT_SESSION = 99c7d9b7-0727-42db-b6aa-07b284695a58
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -554,7 +650,6 @@ MAKEFILES :=
 <F = $(notdir $<)
 # environment
 LC_ALL = C
- 
 # environment
 HOSTTYPE = x86_64
 # automatic
@@ -575,8 +670,10 @@ TERM = xterm-256color
 VSCODE_EXTHOST_WILL_SEND_SOCKET = true
 # environment
 WSL_DISTRO_NAME = Ubuntu
+# environment
+MOTD_SHOWN = update-motd
 # variable set hash-table stats:
-# Load=77/1024=8%, Rehash=0, Collisions=4/115=3%
+# Load=78/1024=8%, Rehash=0, Collisions=4/116=3%
 
 # Pattern-specific Variable Values
 
@@ -584,9 +681,9 @@ WSL_DISTRO_NAME = Ubuntu
 
 # Directories
 
-# . (device 2080, inode 44728): 7 files, no impossibilities.
+# . (device 2080, inode 44728): 8 files, no impossibilities.
 
-# 7 files, no impossibilities in 1 directories.
+# 8 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -663,12 +760,12 @@ clean: distclean
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 14 / storage = 111 B / avg = 7 B
-# current buf: size = 8162 B / used = 111 B / count = 14 / avg = 7 B
+# strcache buffers: 1 (0) / strings = 15 / storage = 119 B / avg = 7 B
+# current buf: size = 8162 B / used = 119 B / count = 15 / avg = 7 B
 
-# strcache performance: lookups = 24 / hit rate = 41%
+# strcache performance: lookups = 25 / hit rate = 40%
 # hash-table stats:
-# Load=14/8192=0%, Rehash=0, Collisions=1/24=4%
-# Finished Make data base on Thu Jun  9 19:13:59 2022
+# Load=15/8192=0%, Rehash=0, Collisions=1/25=4%
+# Finished Make data base on Mon Jun 13 09:30:28 2022
 
  

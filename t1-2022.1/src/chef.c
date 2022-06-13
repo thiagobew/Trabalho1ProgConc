@@ -1,37 +1,42 @@
 #include "chef.h"
 #include "config.h"
 #include "globals.h"
+#include "worker_gate.h"
 #include <semaphore.h>
 #include <stdlib.h>
 
-// Verifica se todos os estudantes já se serviram
-int all_students_served() {
-    queue_t *queue = globals_get_queue();
-    if (!(queue == NULL)) {
-        if (queue->_length > 0) {
-            return 0;
-        }
-    }
-
-    buffet_t *buffets = globals_get_buffets();
-    int number_of_buffets = globals_get_number_of_buffets();
-    for (int i = 0; i < number_of_buffets; i++) {
-        for (int j = 0; j < 5; j++) {
-            if (buffets[i].queue_left[j] != 0)
-                return 0;
-            if (buffets[i].queue_right[j] != 0)
-                return 0;
-        }
-    }
-    return 1;
-}
+pthread_mutex_t tables_mutex;
+sem_t tables_sem;
+sem_t threads_sem;
 
 void *chef_run() {
-    msleep(5000);
+
+    printf("A\n");
+    int *barreira = globals_get_barreira();
+    printf("B\n");
+    int number_of_buffets = globals_get_number_of_buffets();
+    printf("C\n");
+    // Última posição da barreira para o chef
+    barreira[number_of_buffets + 1] = 1;
+    printf("D\n");
+    printf("Esperando\n");
+    sem_wait(&threads_sem);
+    printf("Passou\n");
+
+    // Pegando variáveis globais para inicialização de semáforos
+    int number_of_tables = globals_get_number_of_tables();
+    int seats_per_table = globals_get_table()->_max_seats;
+
+    // Inicializa o semáforo com o valor total de posições disponíveis
+    sem_init(&tables_sem, 0, number_of_tables * seats_per_table);
+
     while (all_students_served() == 0) {
         chef_check_food();
     }
 
+    // Destroi o semáforo e mutex das tables
+    sem_destroy(&tables_sem);
+    pthread_mutex_destroy(&tables_mutex);
     pthread_exit(NULL);
 }
 

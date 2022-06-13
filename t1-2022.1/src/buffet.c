@@ -1,17 +1,23 @@
 #include "buffet.h"
 #include "config.h"
 #include "globals.h"
+#include "worker_gate.h"
 #include <semaphore.h>
 #include <stdlib.h>
 
 // Semáforo único usado pelo worker_gate e pelos buffets
 sem_t gate_sem;
+sem_t threads_sem;
 
 void *buffet_run(void *arg) {
-    int all_students_entered = FALSE;
     buffet_t *self = (buffet_t *)arg;
-    /*  O buffet funciona enquanto houver alunos na fila externa. */
-    while (all_students_entered == FALSE) {
+
+    int *barreira = globals_get_barreira();
+    barreira[self->_id] = 1;
+    sem_wait(&threads_sem);
+
+    /*  O buffet funciona enquanto houver alunos na fila externa ou se alimentando */
+    while (all_students_served() == 0) {
         /* Cada buffet possui: Arroz, Feijão, Acompanhamento, Proteína e Salada */
         /* Máximo de porções por bacia (40 unidades). */
         _log_buffet(self);
@@ -22,7 +28,8 @@ void *buffet_run(void *arg) {
     // Destrói o semáforo de cada comida
     for (int i = 0; i < 5; i++) {
         sem_destroy(&self->_meal_sem[i]);
-    }
+    };
+
     pthread_exit(NULL);
 }
 
@@ -162,7 +169,7 @@ void _log_buffet(buffet_t *self) {
 
     printf("\n\n\u250F\u2501 Queue left: [ %d %d %d %d %d ]\n", ids_left[0], ids_left[1], ids_left[2], ids_left[3], ids_left[4]);
     fflush(stdout);
-    // Inteiros de comida foram alterados para semáforo para facilitar a sincronização entre sa threads que acessam a comida
+    // Inteiros de comida foram alterados para semáforo para facilitar a sincronização entre as threads que acessam a comida
     printf("\u2523\u2501 BUFFET %d = [RICE: %d/40 BEANS:%d/40 PLUS:%d/40 PROTEIN:%d/40 SALAD:%d/40]\n",
            self->_id, meal0, meal1, meal2, meal3, meal4);
     // printf("\u2523\u2501 BUFFET %d = [RICE: %d/40 BEANS:%d/40 PLUS:%d/40 PROTEIN:%d/40 SALAD:%d/40]\n",
