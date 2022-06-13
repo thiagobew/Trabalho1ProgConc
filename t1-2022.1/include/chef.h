@@ -8,8 +8,6 @@ typedef struct chef {
     pthread_t thread;
 } chef_t;
 
-extern sem_t quant_buffets_initialized_sem;
-
 /**
  * @brief Inicializa a thread do chef.
  *

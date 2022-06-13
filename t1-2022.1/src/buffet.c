@@ -7,11 +7,9 @@
 
 // Semáforo único usado pelo worker_gate e pelos buffets
 sem_t gate_sem;
-sem_t quant_buffets_initialized_sem;
 
 void *buffet_run(void *arg) {
     buffet_t *self = (buffet_t *)arg;
-    sem_post(&quant_buffets_initialized_sem);
 
     int done = 0;
     while (done == 0) {
