@@ -7,7 +7,8 @@
 #include "table.h"
 
 /**
- * @brief Retorna um booleano indicando se todos os estudantes entraram e a fila está vazia.
+ * @brief Retorna um booleano indicando se todos os estudantes entraram e a fila
+ * está vazia.
  *
  */
 extern int all_students_served();
@@ -125,19 +126,5 @@ extern void globals_set_number_of_buffets(int number_of_buffets);
  * @return int
  */
 extern int globals_get_number_of_buffets();
-
-/**
- * @brief Seta o numero de buffets (de modo global)
- *
- *  @param quant
- */
-extern void globals_set_barreira(int quant);
-
-/**
- * @brief Retorna a quantidade de buffets (de modo global)
- *
- * @return int*
- */
-extern int *globals_get_barreira();
 
 #endif
