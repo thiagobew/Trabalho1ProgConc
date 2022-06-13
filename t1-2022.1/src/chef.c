@@ -5,7 +5,8 @@
 #include <stdlib.h>
 
 void *chef_run() {
-    msleep(5000);
+    // Msleep impede all_students_served de tentar acessar buffets que ainda não existem
+    // msleep(1000);
     while (all_students_served() == 0) {
         chef_check_food();
     }
@@ -21,6 +22,8 @@ void chef_put_food(sem_t *meal_sem) {
 
 void chef_check_food() {
     buffet_t *buffets = globals_get_buffets();
+    while (buffets == NULL)
+        buffets = globals_get_buffets();
 
     int number_of_buffets = globals_get_number_of_buffets();
     for (int i = 0; i < number_of_buffets; i++) {

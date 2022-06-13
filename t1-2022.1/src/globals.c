@@ -5,6 +5,7 @@
 queue_t *students_queue = NULL;
 table_t *table = NULL;
 buffet_t *buffets_ref = NULL;
+sem_t buffets_start_sem;
 
 int students_number = 0;
 int number_of_buffets = 0;
@@ -83,9 +84,13 @@ int all_students_served() {
     }
 
     buffet_t *buffets = globals_get_buffets();
+    if (buffets == NULL)
+        return 0;
     int number_of_buffets = globals_get_number_of_buffets();
     for (int i = 0; i < number_of_buffets; i++) {
         for (int j = 0; j < 5; j++) {
+            if (buffets == NULL)
+                continue;
             if (buffets[i].queue_left[j] != 0)
                 return 0;
             if (buffets[i].queue_right[j] != 0)
@@ -101,5 +106,6 @@ int all_students_served() {
  * dessa função.
  */
 void globals_finalize() {
+    sem_destroy(&buffets_start_sem);
     free(table);
 }

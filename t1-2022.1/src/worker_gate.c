@@ -91,6 +91,8 @@ void worker_gate_init(worker_gate_t *self) {
 void worker_gate_finalize(worker_gate_t *self) {
     // Destroi o semáforo e mutex das tables
     sem_destroy(&tables_sem);
+    sem_destroy(&gate_sem);
+    sem_destroy(&queue_sem);
     pthread_mutex_destroy(&tables_mutex);
     // Finaliza
     pthread_join(self->thread, NULL);

@@ -10,7 +10,7 @@ sem_t gate_sem;
 void *buffet_run(void *arg) {
     buffet_t *self = (buffet_t *)arg;
 
-    msleep(100);
+    // msleep(100);
     /*  O buffet funciona enquanto houver alunos na fila externa ou se servindo */
     while (all_students_served() == 0) {
         /* Cada buffet possui: Arroz, Feijão, Acompanhamento, Proteína e Salada */
