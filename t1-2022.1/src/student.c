@@ -15,17 +15,16 @@ void *student_run(void *arg) {
     student_t *self = (student_t *)arg;
     table_t *tables = globals_get_table();
 
-    // Criação do mutex para controlar as ações do estudante
+    // Criação do semáforo para controlar as ações do estudante
     sem_init(&self->student_sem, 0, 0);
 
     worker_gate_insert_queue_buffet(self);
-    msleep(5000);
     sem_wait(&self->student_sem);
     student_serve(self);
     student_seat(self, tables);
     student_leave(self, tables);
 
-    // Destroi o mutex
+    // Destroi o semáforo
     sem_destroy(&self->student_sem);
     pthread_exit(NULL);
 };

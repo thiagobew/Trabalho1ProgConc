@@ -62,6 +62,7 @@ queue_t *queue_insert(queue_t *self, student_t *student) {
 
 student_t *queue_remove(queue_t *self) {
     if (self->_length > 0) {
+        // printf("Removendo item\n");
         /*Se a fila possui elementos, retira o primeiro elemento em ordem FIFO (First In, First Out)*/
 
         student_t *student = NULL;

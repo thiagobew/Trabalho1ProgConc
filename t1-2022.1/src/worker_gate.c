@@ -7,6 +7,11 @@
 worker_gate_t self_thread;
 pthread_mutex_t tables_mutex;
 sem_t tables_sem;
+sem_t queue_sem;
+
+void worker_gate_look_queue() {
+    sem_wait(&queue_sem);
+}
 
 void worker_gate_remove_student() {
     // Pega o array de buffets
@@ -14,12 +19,11 @@ void worker_gate_remove_student() {
     queue_t *queue = globals_get_queue();
     // Retira o primeiro estudante da fila
     student_t *student = queue_remove(queue);
-    int buffet_found = 0;
 
     // Executa um while até encontrar o buffet que está vazio
     // NOTA: Essa função só será executada quando houver certeza que existe um buffet com lugares vazios,
     // então essa situação não se caracteriza como um spin-lock
-
+    int buffet_found = 0;
     while (1) {
         if (buffet_found)
             break;
@@ -51,29 +55,28 @@ void worker_gate_look_buffet() {
 }
 
 void *worker_gate_run(void *arg) {
-    int all_students_entered;
     int number_students;
 
     number_students = *((int *)arg);
-    all_students_entered = number_students > 0 ? FALSE : TRUE;
 
-    pthread_mutex_init(&tables_mutex, NULL);
-    msleep(5000);
     int number_of_buffets = globals_get_number_of_buffets();
     int number_of_tables = globals_get_number_of_tables();
-    int seats_per_table = globals_get_table()->_max_seats;
+    int seats_per_table = globals_get_seats_per_table();
 
-    // Inicializa o semáforo com o valor total de posições disponíveis
+    // Inicializa mutex para mesas e o semáforo e com o valor total de posições disponíveis
     sem_init(&tables_sem, 0, number_of_tables * seats_per_table);
+    pthread_mutex_init(&tables_mutex, NULL);
+    // Inicializa um semáforo para controlar quantos alunos estão na fila
+    sem_init(&queue_sem, 0, 0);
     // Inicializa o semáforo dos buffets e gate
     sem_init(&gate_sem, 0, number_of_buffets * 10);
 
-    while (all_students_entered == FALSE) {
+    while (number_students > 0) {
+        worker_gate_look_queue();
         worker_gate_look_buffet();
         worker_gate_remove_student();
 
         number_students--;
-        all_students_entered = number_students > 0 ? FALSE : TRUE;
     }
 
     pthread_exit(NULL);
@@ -102,4 +105,5 @@ void worker_gate_insert_queue_buffet(student_t *student) {
     // Pega a fila e manda o student para ela
     queue_t *queue = globals_get_queue();
     queue_insert(queue, student);
+    sem_post(&queue_sem);
 }
