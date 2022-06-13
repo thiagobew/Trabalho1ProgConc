@@ -47,7 +47,7 @@ void student_seat(student_t *self, table_t *table) {
     }
 
     pthread_mutex_unlock(&tables_mutex);
-    msleep(6000);
+    msleep(1000);
 }
 
 void student_serve(student_t *self) {
@@ -56,7 +56,7 @@ void student_serve(student_t *self) {
 
     while (self->_buffet_position != -1) {
         if (self->_wishes[self->_buffet_position] == 1) {
-            msleep(1000);
+            msleep(100);
             // Pega a comida dando wait no semáforo que representa a comida
             sem_wait(&buffet_student->_meal_sem[self->_buffet_position]);
         }

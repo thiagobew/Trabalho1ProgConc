@@ -10,14 +10,27 @@ sem_t gate_sem;
 void *buffet_run(void *arg) {
     buffet_t *self = (buffet_t *)arg;
 
-    // msleep(100);
-    /*  O buffet funciona enquanto houver alunos na fila externa ou se servindo */
-    while (all_students_served() == 0) {
-        /* Cada buffet possui: Arroz, Feijão, Acompanhamento, Proteína e Salada */
-        /* Máximo de porções por bacia (40 unidades). */
+    int done = 0;
+    while (done == 0) {
         _log_buffet(self);
+        done = 1;
 
-        msleep(1000); /* Pode retirar este sleep quando implementar a solução! */
+        if (globals_get_students() > 0) {
+            done = 0;
+        } else {
+            for (int j = 0; j < 5; j++) {
+                if (self->queue_left[j] != 0) {
+                    done = 0;
+                    break;
+                }
+                if (self->queue_right[j] != 0) {
+                    done = 0;
+                    break;
+                }
+            }
+        }
+
+        // msleep(1000); /* Pode retirar este sleep quando implementar a solução! */
     }
 
     // Destrói o semáforo de cada comida

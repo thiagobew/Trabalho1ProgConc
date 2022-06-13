@@ -56,9 +56,9 @@ void worker_gate_look_buffet() {
 
 void *worker_gate_run(void *arg) {
     int number_students;
-
     number_students = *((int *)arg);
 
+    // Pega a variável
     int number_of_buffets = globals_get_number_of_buffets();
     int number_of_tables = globals_get_number_of_tables();
     int seats_per_table = globals_get_seats_per_table();
@@ -76,7 +76,8 @@ void *worker_gate_run(void *arg) {
         worker_gate_look_buffet();
         worker_gate_remove_student();
 
-        number_students--;
+        // Atualiza a variável global de estudantes que faltam na fila
+        globals_set_students(--number_students);
     }
 
     pthread_exit(NULL);
