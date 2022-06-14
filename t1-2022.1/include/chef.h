@@ -43,4 +43,18 @@ extern void chef_put_food();
  */
 extern void chef_check_food();
 
+/**
+ * @brief Retorna TRUE se os buffets e a fila estiverem vazios, e FALSE do contrário.
+ *
+ * @param  none
+ */
+int all_students_served();
+
+/**
+ * @brief Checa e espera as variáveis de buffet_t serem setadas.
+ *
+ * @param  none
+ */
+void wait_buffets_initialize();
+
 #endif

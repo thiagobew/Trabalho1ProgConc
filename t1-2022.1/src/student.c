@@ -18,7 +18,10 @@ void *student_run(void *arg) {
     // Criação do semáforo para controlar as ações do estudante
     sem_init(&self->student_sem, 0, 0);
 
-    worker_gate_insert_queue_buffet(self);
+    // Insere estudante na fila de fora do RU
+    worker_gate_insert_student_in_queue(self);
+
+    // Espera o worker gate liberar o estudante para entrar no RU
     sem_wait(&self->student_sem);
     student_serve(self);
     student_seat(self, tables);
@@ -54,6 +57,7 @@ void student_serve(student_t *self) {
     buffet_t *buffets = globals_get_buffets();
     buffet_t *buffet_student = buffets + self->_id_buffet;
 
+    // enquanto !(última posição do buffet)
     while (self->_buffet_position != -1) {
         if (self->_wishes[self->_buffet_position] == 1) {
             msleep(100);

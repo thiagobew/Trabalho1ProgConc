@@ -7,21 +7,18 @@
 #include "table.h"
 
 /**
- * @brief Retorna um booleano indicando se todos os estudantes entraram e a fila está vazia.
- *
- */
-extern int all_students_served();
-/**
  * @brief Seta o numero de cadeiras por mesa (de modo global)
  *
  */
 extern void globals_set_seats_per_table(int number_tables);
+
 /**
  * @brief Retorna a quantidade de cadeiras por mesa (de modo global)
  *
  * @return buffet_t*
  */
 extern int globals_get_seats_per_table();
+
 /**
  * @brief Inicia uma fila (de modo global)
  *
@@ -56,20 +53,6 @@ extern int globals_get_students();
  * @param t
  */
 extern void globals_set_table(table_t *t);
-
-/**
- * @brief Inicia um objeto de config (de modo global).
- *
- * @param t
- */
-extern void globals_set_config(config_t *t);
-
-/**
- * @brief Inicia um objeto de config (de modo global).
- *
- * @param t
- */
-extern config_t *globals_get_config();
 
 /**
  * @brief Retorna um array de mesas (de modo global)

@@ -37,15 +37,33 @@ extern void worker_gate_finalize(worker_gate_t *self);
 extern void *worker_gate_run();
 
 /**
- * @brief Chegou a vez do próximo! Função que faz com que o funcionário retire um estudante da fila.
+ * @brief Funcionário direciona o estudante para o buffet.
  *
  */
-extern void worker_gate_remove_queue_student();
+void worker_gate_insert_student_in_buffet(student_t *student);
 
 /**
- * @brief Função que faz com que o funcionário direcione o estudante para o buffet.
+ * @brief Funcionário coloca o estudante na fila de fora.
  *
  */
-extern void worker_gate_insert_queue_buffet(student_t *student);
+extern void worker_gate_insert_student_in_queue(student_t *student);
+
+/**
+ * @brief Funcionário espera que tenha alguem na fila.
+ *
+ */
+void worker_gate_look_queue();
+
+/**
+ * @brief Funcionário espera que tenha algum lugar disponível nos buffets para inserir estudante.
+ *
+ */
+void worker_gate_look_buffet();
+
+/**
+ * @brief Funcionário remove um estudante da fila e o retorna.
+ *
+ */
+student_t *worker_gate_remove_student();
 
 #endif

@@ -67,12 +67,6 @@ buffet_t *globals_get_buffets() {
     return buffets_ref;
 }
 
-void wait_structures_to_start() {
-    while (table == NULL || students_queue == NULL || buffets_ref == NULL) {
-    }
-    return;
-}
-
 /**
  * @brief Finaliza todas as variáveis globais que ainda não foram liberadas.
  *  Se criar alguma variável global que faça uso de mallocs, lembre-se sempre de usar o free dentro
