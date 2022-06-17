@@ -2,6 +2,7 @@
     "makefile.extensionOutputFolder": "./.vscode",
     "files.associations": {
         "config.h": "c",
-        "globals.h": "c"
+        "globals.h": "c",
+        "semaphore.h": "c"
     }
 }

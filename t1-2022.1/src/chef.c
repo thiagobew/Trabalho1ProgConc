@@ -1,60 +1,80 @@
 #include "chef.h"
 #include "config.h"
 #include "globals.h"
-#include "worker_gate.h"
 #include <semaphore.h>
 #include <stdlib.h>
 
-pthread_mutex_t tables_mutex;
-sem_t tables_sem;
-sem_t threads_sem;
-
 void *chef_run() {
-
-  printf("Esperando\n");
-  sem_wait(&threads_sem);
-  printf("Passou\n");
-
-  // Pegando variáveis globais para inicialização de semáforos
-  int number_of_tables = globals_get_number_of_tables();
-  int seats_per_table = globals_get_table()->_max_seats;
-
-  // Inicializa o semáforo com o valor total de posições disponíveis
-  sem_init(&tables_sem, 0, number_of_tables * seats_per_table);
-
-  while (all_students_served() == 0) {
-    chef_check_food();
-  }
-
-  // Destroi o semáforo e mutex das tables
-  sem_destroy(&tables_sem);
-  pthread_mutex_destroy(&tables_mutex);
-  pthread_exit(NULL);
-}
-
-void chef_put_food(sem_t *meal_sem) {
-  for (int i = 0; i < 40; i++) {
-    sem_post(meal_sem);
-  }
-}
-
-void chef_check_food() {
-  buffet_t *buffets = globals_get_buffets();
-
-  int number_of_buffets = globals_get_number_of_buffets();
-  for (int i = 0; i < number_of_buffets; i++) {
-    for (int j = 0; j < 5; j++) {
-
-      int food_amount;
-      sem_t *meal_sem = &buffets[i]._meal_sem[j];
-      sem_getvalue(meal_sem, &food_amount);
-
-      if (food_amount == 0) {
-        printf("Colocando comida no buffet %d\n", buffets[i]._id);
-        chef_put_food(meal_sem);
-      }
+    wait_buffets_initialize(); // Espera ocupada
+    while (all_students_served() == FALSE) {
+        chef_check_food();
     }
-  }
+
+    pthread_exit(NULL);
+}
+
+// Verifica se algum alimento acabou e chama a função para repor
+void chef_check_food() {
+    buffet_t *buffets = globals_get_buffets();
+    int number_of_buffets = globals_get_number_of_buffets();
+
+    for (int i = 0; i < number_of_buffets; i++) {
+        for (int j = 0; j < 5; j++) {
+            int food_amount;
+            sem_t *meal_sem = &buffets[i]._meal_sem[j];
+            sem_getvalue(meal_sem, &food_amount);
+
+            if (food_amount == 0) {
+                chef_put_food(meal_sem);
+            }
+        }
+    }
+}
+
+// Espera ocupada até os buffets serem inicializados
+void wait_buffets_initialize() {
+    /* Motivo da espera ocupada >> */
+    /*
+        Visto que nossa implementação da função all_students_served precisava analisar todos
+        os buffets e que a inicialização deles e do chef partem diretamente da main, não conseguimos
+        encontrar nenhuma outra solução que não necessitasse alterar a main, tentamos colocar um semáforo
+        para forçar uma sincronização com o chef e as threads de buffet, mas como essas estruturas de
+        sincronização precisam ser iniciadas a sincronização não ocorria, exemplo: Se o init ficasse no chef
+        os buffets davam um sem_post em um semáforo ainda não iniciado e o chef nunca saía do sem_wait, visto que
+        é uma sincronização que apenas espera as outras threads serem iniciadas no começo do programa não é muito custoso
+    */
+
+    buffet_t *buffets = globals_get_buffets();
+    while (buffets == NULL)
+        buffets = globals_get_buffets();
+}
+
+// Repõe a comida, dando 40 post no semáforo que representa a comida
+void chef_put_food(sem_t *meal_sem) {
+    // O sem_post ocorre 40 vezes pois o máximo de comida que cabe é 40 unidades
+    for (int i = 0; i < 40; i++) {
+        sem_post(meal_sem);
+    }
+}
+
+// Verifica se todos os estudantes já se serviram
+int all_students_served() {
+    // Vê se ainda existem alunos na fila externa
+    if (globals_get_students() > 0)
+        return FALSE;
+
+    buffet_t *buffets = globals_get_buffets();
+    int number_of_buffets = globals_get_number_of_buffets();
+    // Passa por todas as posições de todos os buffets verificando se existe alunos lá
+    for (int i = 0; i < number_of_buffets; i++) {
+        for (int j = 0; j < 5; j++) {
+            if (buffets[i].queue_left[j] != 0)
+                return FALSE;
+            if (buffets[i].queue_right[j] != 0)
+                return FALSE;
+        }
+    }
+    return TRUE;
 }
 
 /* --------------------------------------------------------- */
@@ -62,10 +82,10 @@ void chef_check_food() {
 /* --------------------------------------------------------- */
 
 void chef_init(chef_t *self) {
-  pthread_create(&self->thread, NULL, chef_run, NULL);
+    pthread_create(&self->thread, NULL, chef_run, NULL);
 }
 
 void chef_finalize(chef_t *self) {
-  pthread_join(self->thread, NULL);
-  free(self);
+    pthread_join(self->thread, NULL);
+    free(self);
 }

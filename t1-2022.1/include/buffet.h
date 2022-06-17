@@ -47,11 +47,17 @@ extern void buffet_finalize(buffet_t *self, int number_of_buffets);
 extern void buffet_next_step(buffet_t *self, student_t *student);
 
 /**
- * @brief Retorna TRUE quando inseriu um estudante com sucesso no fim da fila do buffet.
+ * @brief Atualiza os dados do estudante e do buffet em relação ao buffet-destino.
+ *
+ */
+extern void buffet_queue_insert(buffet_t *self, student_t *student);
+
+/**
+ * @brief Retorna TRUE quando a fila de fora está vazia e o respectivo buffet já está vazio.
  *        Retorna FALSE, caso contrário.
  *
  */
-extern int buffet_queue_insert(buffet_t *self, student_t *student);
+int has_students_serving(buffet_t *self);
 
 /**
  * @brief Referências para funções privadas ao arquivo.
