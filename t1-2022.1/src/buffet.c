@@ -14,7 +14,6 @@ void *buffet_run(void *arg) {
   // Enquanto ainda existem alunos se servindo a thread continua viva
   while (has_students_serving(self) == FALSE) {
     _log_buffet(self);
-    msleep(500); // Sleep para deixar o print mais legível
   }
 
   // Destrói o semáforo de cada comida, cada comida é representada por um
